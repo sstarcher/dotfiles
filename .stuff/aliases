@@ -1,0 +1,84 @@
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+#https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
+
+git_org() {
+    ORG=$1
+    PAGE=${2:-1}
+    set -x
+    curl -u ${GITHUB_TOKEN}:x-oauth-basic -s https://api.github.com/orgs/${ORG}/repos\?per_page\=100\&page\=${PAGE} | ruby -rubygems -e 'require "json"; JSON.load(STDIN.read).each { |repo| %x[git clone --depth=1 #{repo["ssh_url"]} ]}'
+}
+
+tf(){
+    terraform "$@" | landscape
+}
+
+ssh-bastion() {
+    ssh -o ProxyCommand='ssh -W %h:%p bastion' $@
+}
+
+virtenv(){
+  ENV=${1:-"default_env"}
+  source /usr/local/bin/virtualenvwrapper.sh
+  workon ${ENV}
+}
+
+ecr(){
+    eval "$(aws ecr get-login --no-include-email)"
+}
+
+tag(){
+    if [ "$#" -ne 2 ]; then
+        echo "Expected 2 parameters, but got $#"
+        echo "tag TAG MESSAGE"
+        return 1
+    fi
+
+    TAG=$1
+    MESSAGE=$2
+
+    if [ -z "$GREN_GITHUB_TOKEN" ]; then
+        echo 'GREN_GITHUB_TOKEN must be set'
+        return 1
+    fi
+
+    BRANCH=$(git rev-parse --abbrev-ref HEAD)
+    if [ "$BRANCH" != "master" ]; then
+        echo 'switching to master'
+        git checkout master
+    fi
+
+    git pull
+    git tag -a "$TAG" -m "$MESSAGE"
+    git push origin "$TAG"
+
+    gren release -D commits
+}
+
+function brew() {
+    local dump=false;
+    if [[ $# -gt 0 ]]; then
+        case "$1" in
+            *install|*tap)
+                dump=true;
+                ;;
+            cask)
+                if [[ $# -gt 2 ]]; then
+                    case "$2" in
+                        *install)
+                            dump=true;
+                            ;;
+                    esac
+                fi
+                ;;
+        esac
+    fi
+    command brew "$@"
+
+    if $dump; then
+        echo "Updating Brewfile"
+        command brew bundle dump --force --file="$HOME/Brewfile"
+    fi
+}
+
+alias prometheus="kubectl port-forward -n ops svc/prometheus-server 8080:80"
+alias k="kubectl $@"
