@@ -1,11 +1,15 @@
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 #https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
-
+alias sed=gsed
 git_org() {
     ORG=$1
     PAGE=${2:-1}
     set -x
     curl -u ${GITHUB_TOKEN}:x-oauth-basic -s https://api.github.com/orgs/${ORG}/repos\?per_page\=100\&page\=${PAGE} | ruby -rubygems -e 'require "json"; JSON.load(STDIN.read).each { |repo| %x[git clone --depth=1 #{repo["ssh_url"]} ]}'
+}
+
+diff_oncology(){
+   grep -v 'chart' | grep -v 'checksum' | grep -E -3 '(\-|\+)\s\s.*' 
 }
 
 tf(){
@@ -24,6 +28,22 @@ virtenv(){
 
 ecr(){
     eval "$(aws ecr get-login --no-include-email)"
+}
+
+patch(){
+    git checkout master
+    git pull
+    TAG=$(helm-release . --print-computed-version --bump patch)
+    git tag -a -m 'tagging release' $TAG
+    git push origin $TAG
+}
+
+minor(){
+    git checkout master
+    git pull
+    TAG=$(helm-release . --print-computed-version --bump minor)
+    git tag -a -m 'tagging release' $TAG
+    git push origin $TAG
 }
 
 tag(){
@@ -80,5 +100,63 @@ function brew() {
     fi
 }
 
+tf-upgrade() {
+    (
+        set -e
+        git checkout master
+        git pull
+        git fetch --tags -f
+        rm -rf .terraform
+        terraform init
+        terraform 0.12upgrade -yes || true
+        rm versions.tf || true
+        rm -rf .terraform  || true
+
+        if [[ -d "test"  ]]; then
+            pushd test
+            rm -rf .terraform
+            sed -i 's#"\.\."#".\/\.\."#g' ./*.tf
+            terraform init
+            terraform 0.12upgrade -yes || true
+            rm versions.tf || true
+            terraform plan  -var name=bob || terraform plan
+            rm -rf .terraform || true
+            popd
+        fi
+
+        if grep -R 'TODO' .; then
+            return 1
+        fi
+        git commit -m 'upgrading to terraform 0.12' .
+        git push
+        TAG=$(helm-release . --print-computed-version --bump minor)
+        tag $TAG 'upgrade terraform'
+        echo $TAG
+    )
+}
+
 alias prometheus="kubectl port-forward -n ops svc/prometheus-server 8080:80"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH=$HOME/.gloo/bin:$PATH
+export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
+
+
 alias k="kubectl $@"
+
+alias kc='kubectl'
+
+alias kgp='kubectl get pods'
+
+alias kgs='kubectl get svc'
+
+alias kgc='kubectl get componentstatuses'
+
+alias kctx='kubectl config current-context'
+
+alias kcon='kubectl config use-context'
+
+alias kgc='kubectl config get-context'
+
+alias kne="kubectl describe nodes | egrep 'Events|Name:' | grep -v 'none'"
+
+alias gf='git commit --fixup HEAD .'
