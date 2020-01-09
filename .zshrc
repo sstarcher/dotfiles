@@ -53,6 +53,7 @@ export \
 
 # Go
 export GOPATH=$HOME/go
+export GO111MODULE=auto
 export PATH=$GOPATH/bin:$PATH
 
 # AWS
@@ -66,7 +67,7 @@ if [[ -f /usr/local/share/chtf/chtf.sh ]]; then
     source "/usr/local/share/chtf/chtf.sh"
 fi
 
-chtf 0.11.11
+chtf 0.12.18
 
 
 precmd() {
@@ -84,5 +85,10 @@ if [ $commands[kubectl] ]; then
 fi
 
 
+eval "$(jira --completion-script-bash)"
+
 source ~/.stuff/aliases
 source ~/.stuff/secret
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
