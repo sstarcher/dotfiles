@@ -9,7 +9,7 @@ git_org() {
 }
 
 diff_oncology(){
-   grep -v 'chart' | grep -v 'checksum' | grep -E -3 '(\-|\+)\s\s.*' 
+   grep -v 'chart' | grep -v 'checksum' | grep -E -3 '(\-|\+)\s\s.*'
 }
 
 tf(){
@@ -133,6 +133,19 @@ tf-upgrade() {
         tag $TAG 'upgrade terraform'
         echo $TAG
     )
+}
+
+helm-package() {
+  helm-release "$@"
+  helm3 package helm/
+  mv *.tgz ~/github/helm-charts/docs/
+  helm3 repo index ~/github/helm-charts/docs/
+  (
+    cd ~/github/helm-charts/docs/
+    git add *.tgz index.yaml
+    git commit -m 'adding chart'
+    git push
+  )
 }
 
 alias prometheus="kubectl port-forward -n ops svc/prometheus-server 8080:80"
