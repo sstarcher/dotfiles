@@ -26,10 +26,6 @@ virtenv(){
   workon ${ENV}
 }
 
-ecr(){
-    eval "$(aws ecr get-login --no-include-email)"
-}
-
 patch(){
     git checkout master
     git pull

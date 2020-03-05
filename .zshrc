@@ -16,6 +16,7 @@ compinit
 
 setopt AUTO_CD
 
+export TERM="xterm-256color"
 # Theme
 POWERLEVEL9K_MODE='nerdfont-complete'
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs )
@@ -41,13 +42,12 @@ export \
         VISUAL=vim \
         EDITOR=vim \
         TERMINAL=urxvtc \
-        BROWSER=google-chrome \
+        BROWSER=google-chrome
 
 # Python
 export \
         WORKON_HOME=~/.virtualenvs \
-        VIRTUALENV_PYTHON=python2 \
-        VIRTUALENVWRAPPER_PYTHON=/usr/local/opt/python@2/bin/python2 \
+
         PATH="/usr/local/opt/python@2/bin:$PATH" \
         PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH \
 
@@ -92,3 +92,9 @@ source ~/.stuff/secret
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/sstarcher/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/sstarcher/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/sstarcher/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/sstarcher/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
