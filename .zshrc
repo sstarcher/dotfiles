@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 source /usr/local/share/antigen/antigen.zsh
 antigen init ~/.antigenrc
 
@@ -17,14 +24,6 @@ compinit
 setopt AUTO_CD
 
 export TERM="xterm-256color"
-# Theme
-POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs )
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history virtualenv aws time )
-
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
-POWERLEVEL9K_SHORTEN_DELIMITER=''
-POWERLEVEL9K_DIR_OMIT_FIRST_CHARACTER=true
 
 ZSH_HIGHLIGHT_MAXLENGTH=200
 
@@ -98,3 +97,6 @@ if [ -f '/Users/sstarcher/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/U
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/sstarcher/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/sstarcher/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
