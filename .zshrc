@@ -66,7 +66,7 @@ if [[ -f /usr/local/share/chtf/chtf.sh ]]; then
     source "/usr/local/share/chtf/chtf.sh"
 fi
 
-chtf 0.12.18
+chtf 0.12.25
 
 
 precmd() {
