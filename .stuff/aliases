@@ -144,6 +144,10 @@ helm-package() {
   )
 }
 
+notify(){
+    osascript -e "display notification \"$@\""
+}
+
 alias prometheus="kubectl port-forward -n ops svc/prometheus-server 8080:80"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH=$HOME/.gloo/bin:$PATH
@@ -169,3 +173,5 @@ alias kgc='kubectl config get-context'
 alias kne="kubectl describe nodes | egrep 'Events|Name:' | grep -v 'none'"
 
 alias gf='git commit --fixup HEAD .'
+
+alias pr='git push -u && hub pull-request -o'
