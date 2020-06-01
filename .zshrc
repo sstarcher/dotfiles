@@ -84,19 +84,14 @@ if [ $commands[kubectl] ]; then
 fi
 
 
-eval "$(jira --completion-script-bash)"
-
 source ~/.stuff/aliases
-source ~/.stuff/secret
+if [ -f " ~/.stuff/secret" ]; then
+    source ~/.stuff/secret
+fi
+
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/sstarcher/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/sstarcher/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/sstarcher/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/sstarcher/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
