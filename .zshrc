@@ -46,7 +46,6 @@ export \
 # Python
 export \
         WORKON_HOME=~/.virtualenvs \
-
         PATH="/usr/local/opt/python@2/bin:$PATH" \
         PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH \
 
@@ -55,9 +54,6 @@ export GOPATH=$HOME/go
 export GO111MODULE=auto
 export PATH=$GOPATH/bin:$PATH
 
-# AWS
-export AWS_PROFILE=prod
-
 # gpg keychain
 export GPG_TTY=$(tty)
 
@@ -65,8 +61,6 @@ export GPG_TTY=$(tty)
 if [[ -f /usr/local/share/chtf/chtf.sh ]]; then
     source "/usr/local/share/chtf/chtf.sh"
 fi
-
-chtf 0.12.25
 
 
 precmd() {
@@ -85,7 +79,7 @@ fi
 
 
 source ~/.stuff/aliases
-if [ -f " ~/.stuff/secret" ]; then
+if [ -f ~/.stuff/secret ]; then
     source ~/.stuff/secret
 fi
 
@@ -95,3 +89,6 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
