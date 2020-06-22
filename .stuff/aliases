@@ -1,29 +1,13 @@
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-#https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
 alias sed=gsed
 git_org() {
     ORG=$1
-    PAGE=${2:-1}
-    set -x
-    curl -u ${GITHUB_TOKEN}:x-oauth-basic -s https://api.github.com/orgs/${ORG}/repos\?per_page\=100\&page\=${PAGE} | ruby -rubygems -e 'require "json"; JSON.load(STDIN.read).each { |repo| %x[git clone --depth=1 #{repo["ssh_url"]} ]}'
+    shift
+    hub api orgs/${ORG}/repos --paginate |  jq '.[].full_name'  | xargs -L1 -P10 hub clone $@
 }
 
-diff_oncology(){
-   grep -v 'chart' | grep -v 'checksum' | grep -E -3 '(\-|\+)\s\s.*'
-}
 
 tf(){
     terraform "$@" | landscape
-}
-
-ssh-bastion() {
-    ssh -o ProxyCommand='ssh -W %h:%p bastion' $@
-}
-
-virtenv(){
-  ENV=${1:-"default_env"}
-  source /usr/local/bin/virtualenvwrapper.sh
-  workon ${ENV}
 }
 
 patch(){
@@ -96,59 +80,10 @@ function brew() {
     fi
 }
 
-tf-upgrade() {
-    (
-        set -e
-        git checkout master
-        git pull
-        git fetch --tags -f
-        rm -rf .terraform
-        terraform init
-        terraform 0.12upgrade -yes || true
-        rm versions.tf || true
-        rm -rf .terraform  || true
-
-        if [[ -d "test"  ]]; then
-            pushd test
-            rm -rf .terraform
-            sed -i 's#"\.\."#".\/\.\."#g' ./*.tf
-            terraform init
-            terraform 0.12upgrade -yes || true
-            rm versions.tf || true
-            terraform plan  -var name=bob || terraform plan
-            rm -rf .terraform || true
-            popd
-        fi
-
-        if grep -R 'TODO' .; then
-            return 1
-        fi
-        git commit -m 'upgrading to terraform 0.12' .
-        git push
-        TAG=$(helm-release . --print-computed-version --bump minor)
-        tag $TAG 'upgrade terraform'
-        echo $TAG
-    )
-}
-
-helm-package() {
-  helm-release "$@"
-  helm3 package helm/
-  mv *.tgz ~/github/helm-charts/docs/
-  helm3 repo index ~/github/helm-charts/docs/
-  (
-    cd ~/github/helm-charts/docs/
-    git add *.tgz index.yaml
-    git commit -m 'adding chart'
-    git push
-  )
-}
-
 notify(){
     osascript -e "display notification \"$@\""
 }
 
-alias prometheus="kubectl port-forward -n ops svc/prometheus-server 8080:80"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH=$HOME/.gloo/bin:$PATH
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
@@ -175,3 +110,9 @@ alias kne="kubectl describe nodes | egrep 'Events|Name:' | grep -v 'none'"
 alias gf='git commit --fixup HEAD .'
 
 alias pr='git push -u && hub pull-request -o'
+
+alias git=hub
+
+alias pip=pip3
+
+alias grep=ggrep
