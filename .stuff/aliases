@@ -1,10 +1,21 @@
-alias sed=gsed
-git_org() {
-    ORG=$1
-    shift
-    hub api orgs/${ORG}/repos --paginate |  jq '.[].full_name'  | xargs -L1 -P10 hub clone $@
+
+mt_reserve(){
+  product=$1
+  varient=$2
+  quantity=${3:-99999}
+  curl -s -X POST -F "product_id=$product" -F "variant_id=$varient"  -F 'uuid=modern-times-beer' -F "quantity=${quantity}" https://moderntimes.spcsg.net/client/cart/reserve
 }
 
+# curl --cookie $COOKIES -X POST  'https://www.moderntimesmerch.com/cart/add.js?id=34045774200891&quantity=1'
+mt_count(){
+  echo $1
+  shift 
+  mt_reserve $@ | jq .available
+}
+
+mt(){
+  mt_count 'Chaos Grid' 5001112617019 34045774200891; mt_count 'Abaddon' 5001095839803 34045727440955; mt_count MDT 5001099411515 34045747265595
+}
 
 tf(){
     terraform "$@" | landscape
@@ -13,7 +24,7 @@ tf(){
 patch(){
     git checkout master
     git pull
-    TAG=$(helm-release . --print-computed-version --bump patch)
+    TAG=$(helm release . --print-computed-version --bump patch)
     git tag -a -m 'tagging release' $TAG
     git push origin $TAG
 }
@@ -21,7 +32,7 @@ patch(){
 minor(){
     git checkout master
     git pull
-    TAG=$(helm-release . --print-computed-version --bump minor)
+    TAG=$(helm release . --print-computed-version --bump minor)
     git tag -a -m 'tagging release' $TAG
     git push origin $TAG
 }
@@ -84,7 +95,28 @@ notify(){
     osascript -e "display notification \"$@\""
 }
 
+# key with newlines to literal newlines
+newline(){
+ sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g' $@ 
+}
+
+# Single line key and insert newlines
+newline_from_single(){
+    sed -e "s/-----BEGIN RSA PRIVATE KEY-----/&\n/"\
+    -e "s/-----END RSA PRIVATE KEY-----/\n&/"\
+    -e "s/\S\{64\}/&\n/g"\
+    $@
+}
+
+newline_from_single_cert(){
+    sed -e "s/-----BEGIN CERTIFICATE-----/&\n/"\
+    -e "s/-----END CERTIFICATE-----/\n&/"\
+    -e "s/\S\{64\}/&\n/g"\
+    $@
+}
+
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="$HOME/.stuff/bin:$PATH"
 export PATH=$HOME/.gloo/bin:$PATH
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
 
@@ -116,3 +148,43 @@ alias git=hub
 alias pip=pip3
 
 alias grep=ggrep
+
+find-envs () {
+  file='envs.sh'
+  dir=$(pwd)
+  while [[ "$dir" != "" ]]; do
+    if [[ -f "$dir/$file" ]]; then
+        source "$dir/$file"
+    fi
+    dir=${dir%/*}
+  done
+}
+
+func tg(){
+    case "$@" in
+        *plan* ) ;&
+        *apply* ) terragrunt "$@" -input=false | landscape ;;
+        * ) terragrunt "$@" ;;
+    esac
+}
+
+func tf(){
+    case "$@" in
+        *plan*) ;&
+        *apply*) terraform "$@" -input=false | landscape ;;
+        *) terraform "$@" ;;
+    esac    
+}
+
+func tt(){
+    find-envs 
+    if [ -f "Makefile" ]; then
+        tf "$@"
+    else
+        tg "$@"
+    fi
+}
+
+alias openssl_crt='openssl x509 -noout -modulus -in'
+alias openssl_key='openssl rsa -noout -modulus -in'
+alias openssl_csr='openssl req -noout -modulus -in'
