@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+hash hub 2>/dev/null || { echo >&2 "hub is required to be installed.  Aborting."; exit 1; }
+
+if [ $# -ne 1 ]; then
+    echo >&2  "The organization is required."
+    echo >&2  "git org-clone MY_ORG"
+    exit 1
+fi
+
+ORG=$1
+shift
+hub api orgs/${ORG}/repos --paginate |  jq '.[] | select(.archived == false) | .full_name'  | xargs -L1 -P10 hub clone $@
+
