@@ -8,8 +8,7 @@ yadm clone git@github.com:sstarcher/dotfiles.git
 ~/.stuff/init.sh
 ```
  
- # Install VSCode
- https://code.visualstudio.com/Download
+ # Install VSCode CLI
 
 From VSCode `SHIFT+CMD+P` type `shell command install`
 
