@@ -13,5 +13,7 @@ yadm clone git@github.com:sstarcher/dotfiles.git
 
 From VSCode `SHIFT+CMD+P` type `shell command install`
 
-# Install Spotify
-https://www.spotify.com/us/download/
+# Install Kinesis Freestyle Edge RGB
+
+https://gaming.kinesis-ergo.com/fs-edge-rgb-support/#smartset
+
