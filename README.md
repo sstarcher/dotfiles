@@ -5,7 +5,7 @@
 brew install yadm
 ssh-keygen -t rsa -b 4096 -C "shane.starcher@gmail.com"
 yadm clone git@github.com:sstarcher/dotfiles.git
-brew bundle Brewfile
+~/.stuff/init.sh
 ```
  
  # Install VSCode
