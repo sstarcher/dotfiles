@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DIR="."
+if [ $# -eq 1 ]; then
+    DIR=$1
+fi
+
+function evil_git_dirty {
+  [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && true
+}
+
+shopt -s globstar
+for i in ${DIR}/*/.git; do # Whitespace-safe and recursive
+(
+    REPO="$(dirname "$i")"
+    cd $REPO
+    if evil_git_dirty; then
+        echo $REPO "is dirty"
+    fi
+
+)
+done
