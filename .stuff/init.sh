@@ -1,13 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-
-brew bundle 
-
-ssh-keygen -t rsa -b 4096 -C "shane.starcher@gmail.com"
-
-yadm clone git@github.com:sstarcher/dotfiles.git
+brew install bundle
+brew bundle ~/Brewfile
 
 sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
 chsh -s /bin/zsh
@@ -38,6 +33,17 @@ defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 # Dock Settings
 defaults write com.apple.dock tilesize -int 80
 
+echo 'To install fonts run `p10k configure`'
+
+while true; do
+    read -p "Terminate everything?" yn
+    case $yn in
+        [Yy]* ) make install; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
@@ -48,4 +54,3 @@ for app in "Activity Monitor" \
 	killall "${app}" &> /dev/null
 done
 
-echo 'To install fonts run `p10k configure`'
