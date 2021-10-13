@@ -51,6 +51,9 @@ export \
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
 
+#GCloud
+export PATH="$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin:$PATH"
+
 # Go
 export GOPATH=$HOME/go
 export GO111MODULE=auto
