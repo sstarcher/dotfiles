@@ -185,6 +185,7 @@ func tt(){
     fi
 }
 
+alias no_ansi="sed 's/\x1b\[[0-9;]*m//g'"
 alias openssl_crt='openssl x509 -noout -modulus -in'
 alias openssl_key='openssl rsa -noout -modulus -in'
 alias openssl_csr='openssl req -noout -modulus -in'
