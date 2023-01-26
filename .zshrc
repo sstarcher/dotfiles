@@ -39,7 +39,7 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 export \
         VISUAL=vim \
         EDITOR=vim \
-        TERMINAL=urxvtc 
+        TERMINAL=urxvtc
 
 # Python
 export \
@@ -71,8 +71,6 @@ fi
 if [[ -f /usr/local/opt/chtf/share/chtf/chtf.sh ]]; then
     source "/usr/local/opt/chtf/share/chtf/chtf.sh"
 fi
-
-chtf 0.11.15
 
 
 
@@ -117,3 +115,19 @@ if [ -f '/Users/shanestarcher/Downloads/google-cloud-sdk/path.zsh.inc' ]; then .
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/shanestarcher/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/shanestarcher/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Created by `pipx` on 2022-01-07 21:51:04
+export PATH="$PATH:/Users/Shane.Starcher/.local/bin"
+
+# Created by `pipx` on 2022-01-07 21:51:11
+export PATH="$PATH:/Users/Shane.Starcher/Library/Python/3.9/bin"
+
+
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+# Nix
+if [[ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]] ; then
+. '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+# End Nix
+export PATH="/usr/local/opt/awscli@1/bin:$PATH"
