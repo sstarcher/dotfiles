@@ -1,8 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-brew install bundle
-brew bundle ~/Brewfile
+brew bundle install --file ~/Brewfile
 
 sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
 chsh -s /bin/zsh

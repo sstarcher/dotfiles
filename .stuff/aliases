@@ -185,6 +185,9 @@ func tt(){
     fi
 }
 
+alias stern='kubectl stern'
+alias kubens='kubectl ns'
+
 alias no_ansi="sed 's/\x1b\[[0-9;]*m//g'"
 alias openssl_crt='openssl x509 -noout -modulus -in'
 alias openssl_key='openssl rsa -noout -modulus -in'
