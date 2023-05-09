@@ -185,6 +185,8 @@ func tt(){
     fi
 }
 
+alias resin='rsync -r  ~/Documents/Resin/ctb/ /Volumes/emmc/'
+
 alias stern='kubectl stern'
 alias kubens='kubectl ns'
 
