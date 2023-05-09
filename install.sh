@@ -3,6 +3,7 @@ set -euo pipefail
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
 brew bundle install --file ~/Brewfile
 
 # Pathogen
