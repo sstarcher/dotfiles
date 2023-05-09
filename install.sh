@@ -10,7 +10,7 @@ brew bundle install --file ~/Brewfile
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-if [ $(uname) != "Darwin" ]; then
+if [ "$(uname)" != "Darwin" ]; then
     exit 0
 fi
 
