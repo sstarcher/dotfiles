@@ -5,9 +5,9 @@
 brew install yadm
 ssh-keygen -t rsa -b 4096 -C "shane.starcher@gmail.com"
 yadm clone git@github.com:sstarcher/dotfiles.git
-~/.stuff/init.sh
+~/install.sh
 ```
- 
+
  # Install VSCode CLI
 
 From VSCode `SHIFT+CMD+P` type `shell command install`
