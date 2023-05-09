@@ -1,19 +1,28 @@
 #!/bin/bash
 set -euo pipefail
 
-brew bundle install --file ~/Brewfile
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
-chsh -s /bin/zsh
+brew bundle install --file ~/Brewfile
 
 # Pathogen
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
+if [ $(uname) != "Darwin" ]; then
+    exit 0
+fi
+
+###############################################################################
+### Run for Mac
+###############################################################################
+
+sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
+chsh -s /bin/zsh
+
 # https://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x
 # https://github.com/unixorn/awesome-zsh-plugins
 # Change iterm fonts, remember directory
-
 
 # Run mathiasbynes dotfiles
 bash <(curl -fsSL https://raw.githubusercontent.com/mathiasbynens/dotfiles/master/.macos)
