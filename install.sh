@@ -1,9 +1,17 @@
 #!/bin/bash
 set -euox pipefail
 
-exit 0
+(
+    cd /usr/share/fonts/truetype/
+    sudo wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+    sudo wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
+    sudo wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
+    sudo wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+)
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+exit 0
 
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
 brew bundle install --file ~/Brewfile
