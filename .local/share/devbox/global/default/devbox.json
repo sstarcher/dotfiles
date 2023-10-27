@@ -1,0 +1,39 @@
+{
+  "packages": [
+    "ripgrep@latest",
+    "yq-go@latest",
+    "stern@latest",
+    "goreleaser@latest",
+    "antigen@latest",
+    "awscli2@latest",
+    "azure-cli@latest",
+    "zsh@latest",
+    "dive@latest",
+    "fzf@latest",
+    "git-review@latest",
+    "go@latest",
+    "helmfile@latest",
+    "hyperfine@latest",
+    "kubectl@latest",
+    "kubectx@latest",
+    "shellcheck@latest",
+    "sops@latest",
+    "tflint@latest",
+    "yadm@latest",
+    "krew@latest",
+    "kubernetes-helmPlugins.helm-diff@latest",
+    "hub@latest",
+    "pipenv@latest",
+    "zsh-powerlevel10k@latest"
+  ],
+  "shell": {
+    "init_hook": [
+      "echo 'Welcome to devbox!' > /dev/null"
+    ],
+    "scripts": {
+      "test": [
+        "echo \"Error: no test specified\" && exit 1"
+      ]
+    }
+  }
+}
