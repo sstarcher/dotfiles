@@ -1,3 +1,5 @@
+eval "$(devbox global shellenv)"
+
 # causes prompting and needs to be above P10K Instant Prompt
 source /usr/local/share/antigen/antigen.zsh
 antigen init ~/.antigenrc
@@ -41,19 +43,6 @@ export \
         EDITOR=vim \
         TERMINAL=urxvtc
 
-# Python
-export \
-        WORKON_HOME=~/.virtualenvs \
-        PATH="/usr/local/opt/python@2/bin:$PATH" \
-        PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH \
-
-# GNU Tools
-export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
-
-#GCloud
-export PATH="$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin:$PATH"
-
 # Go
 export GOPATH=$HOME/go
 export GO111MODULE=auto
@@ -61,18 +50,6 @@ export PATH=$GOPATH/bin:$PATH
 
 # gpg keychain
 export GPG_TTY=$(tty)
-
-# Source chtf
-if [[ -f /usr/local/share/chtf/chtf.sh ]]; then
-    source "/usr/local/share/chtf/chtf.sh"
-fi
-
-# Source chtf
-if [[ -f /usr/local/opt/chtf/share/chtf/chtf.sh ]]; then
-    source "/usr/local/opt/chtf/share/chtf/chtf.sh"
-fi
-
-
 
 # Iterm Title
 precmd() {
@@ -84,22 +61,6 @@ if [ $ITERM_SESSION_ID ]; then
   precmd
 fi
 
-if [ $commands[kubectl] ]; then
-  source <(kubectl completion zsh)
-fi
-
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
 source ~/.stuff/aliases
 if [ -f ~/.stuff/secret ]; then
     source ~/.stuff/secret
@@ -108,26 +69,5 @@ fi
 # Python
 export PIPENV_MAX_DEPTH=5
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/shanestarcher/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/shanestarcher/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/shanestarcher/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/shanestarcher/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
-# Created by `pipx` on 2022-01-07 21:51:04
-export PATH="$PATH:/Users/Shane.Starcher/.local/bin"
-
-# Created by `pipx` on 2022-01-07 21:51:11
-export PATH="$PATH:/Users/Shane.Starcher/Library/Python/3.9/bin"
-
-
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
-# Nix
-if [[ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]] ; then
-. '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-fi
-# End Nix
-export PATH="/usr/local/opt/awscli@1/bin:$PATH"
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -13,7 +13,7 @@ mt_reserve(){
 # curl --cookie $COOKIES -X POST  'https://www.moderntimesmerch.com/cart/add.js?id=34045774200891&quantity=1'
 mt_count(){
   echo $1
-  shift 
+  shift
   mt_reserve $@ | jq .available
 }
 
@@ -101,7 +101,7 @@ notify(){
 
 # key with newlines to literal newlines
 newline(){
- sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g' $@ 
+ sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g' $@
 }
 
 # Single line key and insert newlines
@@ -149,10 +149,6 @@ alias pr='git push -u && hub pull-request -o'
 
 alias git=hub
 
-alias pip=pip3
-
-alias grep=ggrep
-
 find-envs () {
   file='envs.sh'
   dir=$(pwd)
@@ -177,11 +173,11 @@ func tf(){
         *plan*) ;&
         *apply*) terraform "$@" -input=false | landscape ;;
         *) terraform "$@" ;;
-    esac    
+    esac
 }
 
 func tt(){
-    find-envs 
+    find-envs
     if [ -f "Makefile" ]; then
         tf "$@"
     else
@@ -190,9 +186,6 @@ func tt(){
 }
 
 alias resin='rsync -r  ~/Documents/Resin/ctb/ /Volumes/emmc/'
-
-alias stern='kubectl stern'
-alias kubens='kubectl ns'
 
 alias no_ansi="sed 's/\x1b\[[0-9;]*m//g'"
 alias openssl_crt='openssl x509 -noout -modulus -in'
