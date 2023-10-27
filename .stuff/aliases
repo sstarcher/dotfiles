@@ -1,4 +1,8 @@
 
+sha_diverge(){
+  export SHA=${1}; git log --pretty=oneline $(git merge-base origin/master ${SHA})..${SHA}
+}
+
 mt_reserve(){
   product=$1
   varient=$2
