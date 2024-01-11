@@ -1,7 +1,18 @@
-eval "$(devbox global shellenv)"
+
+export PATH="/usr/local/sbin:$PATH"
+if command -v devbox &> /dev/null; then
+  eval "$(devbox global shellenv)"
+fi
+
+if [ -f /home/linuxbrew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  version=$(ls /home/linuxbrew/.linuxbrew/Cellar/antigen/ | head -n1)
+  source /home/linuxbrew/.linuxbrew/Cellar/antigen/${version}/share/antigen/antigen.zsh
+else
+  source /usr/local/share/antigen/antigen.zsh
+fi
 
 # causes prompting and needs to be above P10K Instant Prompt
-source /usr/local/share/antigen/antigen.zsh
 antigen init ~/.antigenrc
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -61,13 +72,24 @@ if [ $ITERM_SESSION_ID ]; then
   precmd
 fi
 
+
+PATH="$PATH:~/.stuff/bin/"
 source ~/.stuff/aliases
 if [ -f ~/.stuff/secret ]; then
     source ~/.stuff/secret
 fi
+
+PATH="$PATH:$HOME/.local/bin"
+eval "$(zoxide init zsh)"
 
 # Python
 export PIPENV_MAX_DEPTH=5
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export KUBECTL_EXTERNAL_DIFF="_kc_diff"
+
+unalias stern
+unalias kubens

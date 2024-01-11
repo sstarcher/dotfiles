@@ -11,8 +11,6 @@
     "dive@latest",
     "fzf@latest",
     "git-review@latest",
-    "go@latest",
-    "helmfile@latest",
     "hyperfine@latest",
     "kubectl@latest",
     "kubectx@latest",
@@ -21,19 +19,16 @@
     "tflint@latest",
     "yadm@latest",
     "krew@latest",
-    "kubernetes-helmPlugins.helm-diff@latest",
     "hub@latest",
     "pipenv@latest",
-    "zsh-powerlevel10k@latest"
-  ],
-  "shell": {
-    "init_hook": [
-      "echo 'Welcome to devbox!' > /dev/null"
-    ],
-    "scripts": {
-      "test": [
-        "echo \"Error: no test specified\" && exit 1"
-      ]
-    }
-  }
+    "zsh-powerlevel10k@latest",
+    "jq@latest",
+    "terraform@1.5.7",
+    "vals@latest",
+    "kubernetes-helmPlugins.helm-diff@latest",
+    "kubernetes-helm@latest",
+    "watch@latest",
+    "kustomize@5.1.1",
+    "dyff@latest"
+  ]
 }
