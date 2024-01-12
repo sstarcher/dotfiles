@@ -1,5 +1,4 @@
 
-export PATH="/usr/local/sbin:$PATH"
 if command -v devbox &> /dev/null; then
   eval "$(devbox global shellenv)"
 fi
@@ -79,6 +78,7 @@ if [ -f ~/.stuff/secret ]; then
     source ~/.stuff/secret
 fi
 
+# export PATH="/usr/local/sbin:$PATH"
 PATH="$PATH:$HOME/.local/bin"
 eval "$(zoxide init zsh)"
 
