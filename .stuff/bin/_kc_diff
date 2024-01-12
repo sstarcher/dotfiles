@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+dyff between \
+    --exclude=metadata.generation \
+    --exclude=metadata.annotations.argocd.argoproj.io/tracking-id \
+    --exclude=metadata.annotations \
+    --set-exit-code --omit-header "$1" "$2"
