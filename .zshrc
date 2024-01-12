@@ -3,7 +3,7 @@ if command -v devbox &> /dev/null; then
   eval "$(devbox global shellenv)"
 fi
 
-if [ -f /home/linuxbrew ]; then
+if [ -d "/home/linuxbrew" ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   version=$(ls /home/linuxbrew/.linuxbrew/Cellar/antigen/ | head -n1)
   source /home/linuxbrew/.linuxbrew/Cellar/antigen/${version}/share/antigen/antigen.zsh
