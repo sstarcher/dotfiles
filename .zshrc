@@ -91,5 +91,3 @@ export PIPENV_MAX_DEPTH=5
 
 export KUBECTL_EXTERNAL_DIFF="_kc_diff"
 
-unalias stern
-unalias kubens

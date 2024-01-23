@@ -13,14 +13,14 @@ NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Ho
 
 sudo ln -s /bin/zsh /usr/local/bin/zsh
 
+# Pathogen
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
 brew bundle install --file ~/Brewfile
 
 tfenv use
-
-# Pathogen
-mkdir -p ~/.vim/autoload ~/.vim/bundle && \
-curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 if [ "$(uname)" != "Darwin" ]; then
     exit 0
