@@ -3,13 +3,9 @@ if command -v devbox &> /dev/null; then
   eval "$(devbox global shellenv)"
 fi
 
-if [ -d "/home/linuxbrew" ]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  version=$(ls /home/linuxbrew/.linuxbrew/Cellar/antigen/ | head -n1)
-  source /home/linuxbrew/.linuxbrew/Cellar/antigen/${version}/share/antigen/antigen.zsh
-else
-  source /usr/local/share/antigen/antigen.zsh
-fi
+
+antigen_path=$(cat .local/share/devbox/global/default/devbox.lock | jq -r '.packages."antigen@latest".systems."x86_64-linux".store_path')
+source "${antigen_path}/share/antigen/antigen.zsh"
 
 # causes prompting and needs to be above P10K Instant Prompt
 antigen init ~/.antigenrc
@@ -90,4 +86,3 @@ export PIPENV_MAX_DEPTH=5
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export KUBECTL_EXTERNAL_DIFF="_kc_diff"
-
