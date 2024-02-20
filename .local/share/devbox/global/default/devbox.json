@@ -29,6 +29,7 @@
     "kubernetes-helm@latest",
     "watch@latest",
     "kustomize@5.1.1",
-    "dyff@latest"
+    "dyff@latest",
+    "zoxide@latest"
   ]
 }
