@@ -4,7 +4,7 @@ if command -v devbox &> /dev/null; then
 fi
 
 
-antigen_path=$(cat $HOME/.local/share/devbox/global/default/devbox.lock | jq -r '.packages."antigen@latest".systems."x86_64-linux".store_path')
+antigen_path=$(cat "$HOME/.local/share/devbox/global/default/devbox.lock" | jq -r '.packages."antigen@latest".systems."x86_64-linux".store_path')
 if [ -f  "${antigen_path}/share/antigen/antigen.zsh" ]; then
   source "${antigen_path}/share/antigen/antigen.zsh"
   # causes prompting and needs to be above P10K Instant Prompt
@@ -26,7 +26,7 @@ SAVEHIST=1000
 # End of lines configured by zsh-newuser-install
 
 # The following lines were added by compinstall
-zstyle :compinstall filename '/Users/sstarcher/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 autoload -U compinit && compinit
 # End of lines added by compinstall
 
@@ -76,7 +76,6 @@ if [ -f ~/.stuff/secret ]; then
     source ~/.stuff/secret
 fi
 
-# export PATH="/usr/local/sbin:$PATH"
 PATH="$PATH:$HOME/.local/bin"
 eval "$(zoxide init zsh)"
 
