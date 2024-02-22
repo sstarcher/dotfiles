@@ -9,7 +9,7 @@ set -euox pipefail
     sudo wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
 )
 
-NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+#NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 sudo ln -s /bin/zsh /usr/local/bin/zsh
 
@@ -17,10 +17,8 @@ sudo ln -s /bin/zsh /usr/local/bin/zsh
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
-brew bundle install --file ~/Brewfile
-
-tfenv use
+#export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
+#brew bundle install --file ~/Brewfile
 
 if [ "$(uname)" != "Darwin" ]; then
     exit 0
