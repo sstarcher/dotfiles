@@ -4,11 +4,13 @@ if command -v devbox &> /dev/null; then
 fi
 
 
-antigen_path=$(cat .local/share/devbox/global/default/devbox.lock | jq -r '.packages."antigen@latest".systems."x86_64-linux".store_path')
-source "${antigen_path}/share/antigen/antigen.zsh"
+antigen_path=$(cat $HOME/.local/share/devbox/global/default/devbox.lock | jq -r '.packages."antigen@latest".systems."x86_64-linux".store_path')
+if [ -f  "${antigen_path}/share/antigen/antigen.zsh" ]; then
+  source "${antigen_path}/share/antigen/antigen.zsh"
+  # causes prompting and needs to be above P10K Instant Prompt
+  antigen init ~/.antigenrc
+fi
 
-# causes prompting and needs to be above P10K Instant Prompt
-antigen init ~/.antigenrc
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
