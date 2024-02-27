@@ -86,4 +86,10 @@ export PIPENV_MAX_DEPTH=5
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export KUBECTL_EXTERNAL_DIFF="_kc_diff"
+export KUBECTL_EXTERNAL_DIFF='dyff between \
+      --exclude=metadata.generation \
+      --exclude=metadata.annotations.argocd.argoproj.io/tracking-id \
+      --exclude=metadata.annotations \
+      --set-exit-code --omit-header "$1" "$2"'
+
+
