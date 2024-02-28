@@ -30,6 +30,7 @@
     "watch@latest",
     "kustomize@5.1.1",
     "dyff@latest",
-    "zoxide@latest"
+    "zoxide@latest",
+    "helmfile@latest"
   ]
 }
