@@ -1,15 +1,13 @@
 
 if command -v devbox &> /dev/null; then
-  eval "$(devbox global shellenv)"
-fi
+  eval "$(devbox global shellenv --init-hook)"
 
+  source $(devbox global path)/.devbox/nix/profile/default/share/antigen/antigen.zsh
 
-antigen_path=$(cat "$HOME/.local/share/devbox/global/default/devbox.lock" | jq -r '.packages."antigen@latest".systems."x86_64-linux".store_path')
-if [ -f  "${antigen_path}/share/antigen/antigen.zsh" ]; then
-  source "${antigen_path}/share/antigen/antigen.zsh"
   # causes prompting and needs to be above P10K Instant Prompt
   antigen init ~/.antigenrc
 fi
+
 
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
