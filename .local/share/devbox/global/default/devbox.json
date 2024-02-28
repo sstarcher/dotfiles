@@ -31,6 +31,7 @@
     "kustomize@5.1.1",
     "dyff@latest",
     "zoxide@latest",
-    "helmfile@latest"
+    "helmfile@latest",
+    "nodePackages.diff2html-cli@latest"
   ]
 }
