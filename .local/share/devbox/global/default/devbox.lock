@@ -1,14 +1,51 @@
 {
   "lockfile_version": "1",
   "packages": {
-    "antigen@latest": {
-      "last_modified": "2024-02-10T18:15:24Z",
-      "resolved": "github:NixOS/nixpkgs/10b813040df67c4039086db0f6eaf65c536886c6#antigen",
+    "antidote@latest": {
+      "last_modified": "2024-04-19T17:36:04-04:00",
+      "resolved": "github:NixOS/nixpkgs/92d295f588631b0db2da509f381b4fb1e74173c5#antidote",
       "source": "devbox-search",
-      "version": "2.2.3",
+      "version": "1.9.6",
       "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/46afn5ahpf88xrjsxj41vrmkqixfinab-antidote-1.9.6",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/46afn5ahpf88xrjsxj41vrmkqixfinab-antidote-1.9.6"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/v6fhapri66jbp7drgkzjisyzpj0hg8sa-antidote-1.9.6",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/v6fhapri66jbp7drgkzjisyzpj0hg8sa-antidote-1.9.6"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/gk2fgc9q5vahfi71i1jxwbzsfydmlk3s-antidote-1.9.6",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/gk2fgc9q5vahfi71i1jxwbzsfydmlk3s-antidote-1.9.6"
+        },
         "x86_64-linux": {
-          "store_path": "/nix/store/vilsnah5m48j7sr44dsffslaa382vqh6-antigen-2.2.3"
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/hqlaaadvjkjc920gq01wwz2mir83kqyx-antidote-1.9.6",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/hqlaaadvjkjc920gq01wwz2mir83kqyx-antidote-1.9.6"
         }
       }
     },

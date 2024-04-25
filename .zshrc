@@ -1,14 +1,8 @@
-
-
-
-
 if command -v devbox &> /dev/null; then
   eval "$(devbox global shellenv --init-hook)"
 
-  source $(devbox global path)/.devbox/nix/profile/default/share/antigen/antigen.zsh
-
-  # causes prompting and needs to be above P10K Instant Prompt
-  antigen init ~/.antigenrc
+  source $(devbox global path)/.devbox/nix/profile/default/share/antidote/antidote.zsh 
+  antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 fi
 
 
@@ -33,19 +27,7 @@ autoload -U compinit && compinit
 
 setopt AUTO_CD
 
-export TERM="xterm-256color"
-
 ZSH_HIGHLIGHT_MAXLENGTH=200
-
-# History
-HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
-
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
-zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
 
 export \
         VISUAL=vim \
@@ -85,7 +67,13 @@ export PIPENV_MAX_DEPTH=5
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+if [ -n "${commands[fzf-share]}" ]; then
+  source "$(fzf-share)/key-bindings.zsh"
+  source "$(fzf-share)/completion.zsh"
+fi
+
 
 export KUBECTL_EXTERNAL_DIFF='dyff between \
       --exclude=metadata.generation \
