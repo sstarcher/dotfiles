@@ -25,13 +25,15 @@
     "jq@latest",
     "terraform@1.5.7",
     "vals@latest",
-    "kubernetes-helmPlugins.helm-diff@latest",
     "kubernetes-helm@latest",
     "watch@latest",
     "kustomize@5.1.1",
     "dyff@latest",
     "zoxide@latest",
     "helmfile@latest",
-    "nodePackages.diff2html-cli@latest"
+    "nodePackages.diff2html-cli@latest",
+    "kubernetes-helmPlugins.helm-diff@latest",
+    "go@1.20.10",
+    "scmpuff@latest"
   ]
 }
