@@ -132,6 +132,26 @@
         }
       }
     },
+    "go@1.20.10": {
+      "last_modified": "2023-10-25T20:49:13Z",
+      "resolved": "github:NixOS/nixpkgs/75a52265bda7fd25e06e3a67dee3f0354e73243c#go_1_20",
+      "source": "devbox-search",
+      "version": "1.20.10",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/5h8gjl89zx8qxgc572wa3k81zplv8v4z-go-1.20.10"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/y297kbg2493jx8yvhrk5rz70w4psqkgm-go-1.20.10"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/8zv2194v9gl0hlx2ac8p91ihnjwdwm6g-go-1.20.10"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/32iz7w2y5n50slq44qvwdfsb5fs5zqzb-go-1.20.10"
+        }
+      }
+    },
     "goreleaser@latest": {
       "last_modified": "2024-02-10T18:15:24Z",
       "resolved": "github:NixOS/nixpkgs/10b813040df67c4039086db0f6eaf65c536886c6#goreleaser",
@@ -313,22 +333,22 @@
       }
     },
     "kubernetes-helmPlugins.helm-diff@latest": {
-      "last_modified": "2024-02-17T06:30:20Z",
-      "resolved": "github:NixOS/nixpkgs/6e2f00c83911461438301db0dba5281197fe4b3a#kubernetes-helmPlugins.helm-diff",
+      "last_modified": "2024-02-26T19:46:43Z",
+      "resolved": "github:NixOS/nixpkgs/548a86b335d7ecd8b57ec617781f5e652ab0c38e#kubernetes-helmPlugins.helm-diff",
       "source": "devbox-search",
       "version": "3.9.4",
       "systems": {
         "aarch64-darwin": {
-          "store_path": "/nix/store/1i7ml6mif8ps390wbn44dhnb1vlpqgkc-helm-diff-3.9.4"
+          "store_path": "/nix/store/2zz27jwvaq6k0s4pbm3g1l4agi6kvrwp-helm-diff-3.9.4"
         },
         "aarch64-linux": {
-          "store_path": "/nix/store/law3ipav4s1kxrvqy9gcplnpdi4rkqqk-helm-diff-3.9.4"
+          "store_path": "/nix/store/8bi90m81xr7172mz8hgs60fz3asmcyaz-helm-diff-3.9.4"
         },
         "x86_64-darwin": {
-          "store_path": "/nix/store/w3rqvq246w3ssdp1dwlvdnsbhkg8ph8x-helm-diff-3.9.4"
+          "store_path": "/nix/store/84ym11vj08avcmdxcrzqqsh5xxs8ikw0-helm-diff-3.9.4"
         },
         "x86_64-linux": {
-          "store_path": "/nix/store/58w1l76yvlhyl5dwh0j7dz8swirmh16f-helm-diff-3.9.4"
+          "store_path": "/nix/store/wb02nxvrzic3b5b0hv5d2frjzfv216zx-helm-diff-3.9.4"
         }
       }
     },
@@ -395,6 +415,26 @@
         },
         "x86_64-linux": {
           "store_path": "/nix/store/9xpdms5914k3g15961xlm9dr02gkjydm-ripgrep-14.1.0"
+        }
+      }
+    },
+    "scmpuff@latest": {
+      "last_modified": "2024-02-24T23:06:34Z",
+      "resolved": "github:NixOS/nixpkgs/9a9dae8f6319600fa9aebde37f340975cab4b8c0#scmpuff",
+      "source": "devbox-search",
+      "version": "0.5.0",
+      "systems": {
+        "aarch64-darwin": {
+          "store_path": "/nix/store/0bvfb3gp5x7g94inmy9vnhfispsbr03i-scmpuff-0.5.0"
+        },
+        "aarch64-linux": {
+          "store_path": "/nix/store/did1fglgfi0anls4kb1i99q742i4wjlk-scmpuff-0.5.0"
+        },
+        "x86_64-darwin": {
+          "store_path": "/nix/store/x97lrbc9w7z1zl471zgbwqpr8kqz15xp-scmpuff-0.5.0"
+        },
+        "x86_64-linux": {
+          "store_path": "/nix/store/fmqjk52a254s09iqwnn8w0d13c212v0k-scmpuff-0.5.0"
         }
       }
     },
