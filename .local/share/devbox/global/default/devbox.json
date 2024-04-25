@@ -4,7 +4,6 @@
     "yq-go@latest",
     "stern@latest",
     "goreleaser@latest",
-    "antigen@latest",
     "awscli2@latest",
     "azure-cli@latest",
     "zsh@latest",
@@ -34,7 +33,8 @@
     "nodePackages.diff2html-cli@latest",
     "kubernetes-helmPlugins.helm-diff@latest",
     "go@1.20.10",
-    "scmpuff@latest"
+    "scmpuff@latest",
+    "antidote@latest"
   ],
   "env": {
     "HELM_PLUGINS": "$PWD/.devbox/nix/profile/default"
