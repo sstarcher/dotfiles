@@ -35,5 +35,8 @@
     "kubernetes-helmPlugins.helm-diff@latest",
     "go@1.20.10",
     "scmpuff@latest"
-  ]
+  ],
+  "env": {
+    "HELM_PLUGINS": "$PWD/.devbox/nix/profile/default"
+  }
 }

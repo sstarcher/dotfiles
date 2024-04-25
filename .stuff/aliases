@@ -1,4 +1,6 @@
-
+week(){
+  date +%V
+}
 
 sha_diverge(){
   export SHA=${1}; git log --pretty=oneline $(git merge-base origin/master ${SHA})..${SHA}
