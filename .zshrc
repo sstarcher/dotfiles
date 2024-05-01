@@ -14,11 +14,14 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Lines configured by zsh-newuser-install
+
+
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-# End of lines configured by zsh-newuser-install
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
+
+
 
 # The following lines were added by compinstall
 zstyle :compinstall filename "$HOME/.zshrc"
@@ -68,17 +71,14 @@ export PIPENV_MAX_DEPTH=5
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
 if [ -n "${commands[fzf-share]}" ]; then
   source "$(fzf-share)/key-bindings.zsh"
   source "$(fzf-share)/completion.zsh"
 fi
-
 
 export KUBECTL_EXTERNAL_DIFF='dyff between \
       --exclude=metadata.generation \
       --exclude=metadata.annotations.argocd.argoproj.io/tracking-id \
       --exclude=metadata.annotations \
       --set-exit-code --omit-header "$1" "$2"'
-
 
