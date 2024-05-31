@@ -34,7 +34,8 @@
     "kubernetes-helmPlugins.helm-diff@latest",
     "go@1.20.10",
     "scmpuff@latest",
-    "antidote@latest"
+    "antidote@latest",
+    "strace@latest"
   ],
   "env": {
     "HELM_PLUGINS": "$PWD/.devbox/nix/profile/default"

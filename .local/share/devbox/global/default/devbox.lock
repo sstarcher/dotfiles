@@ -535,6 +535,34 @@
         }
       }
     },
+    "strace@latest": {
+      "last_modified": "2024-05-22T06:18:38Z",
+      "resolved": "github:NixOS/nixpkgs/3f316d2a50699a78afe5e77ca486ad553169061e#strace",
+      "source": "devbox-search",
+      "version": "6.9",
+      "systems": {
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/hklg31a79hn7sl77hjn5v0fdp9wxa16q-strace-6.9",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/hklg31a79hn7sl77hjn5v0fdp9wxa16q-strace-6.9"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/sf0zzdv838lpmazpcklshjd7ji3nmsdq-strace-6.9",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/sf0zzdv838lpmazpcklshjd7ji3nmsdq-strace-6.9"
+        }
+      }
+    },
     "terraform@1.5.7": {
       "last_modified": "2023-09-27T18:02:17Z",
       "resolved": "github:NixOS/nixpkgs/517501bcf14ae6ec47efd6a17dda0ca8e6d866f9#terraform",
