@@ -22,20 +22,24 @@
     "pipenv@latest",
     "zsh-powerlevel10k@latest",
     "jq@latest",
-    "terraform@1.5.7",
+    "terraform@latest",
     "vals@latest",
     "kubernetes-helm@latest",
     "watch@latest",
-    "kustomize@5.1.1",
     "dyff@latest",
     "zoxide@latest",
     "helmfile@latest",
     "nodePackages.diff2html-cli@latest",
     "kubernetes-helmPlugins.helm-diff@latest",
-    "go@1.20.10",
+    "go@latest",
     "scmpuff@latest",
     "antidote@latest",
-    "strace@latest"
+    "strace@latest",
+    "trivy@latest",
+    "golangci-lint@latest",
+    "zellij@latest",
+    "cloud-custodian@latest",
+    "bundler@latest"
   ],
   "env": {
     "HELM_PLUGINS": "$PWD/.devbox/nix/profile/default"
