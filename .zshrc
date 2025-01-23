@@ -5,8 +5,6 @@ if command -v devbox &> /dev/null; then
   antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 fi
 
- eval "$(scmpuff init -s)"
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -80,3 +78,4 @@ export KUBECTL_EXTERNAL_DIFF='dyff between \
       --exclude=metadata.annotations.argocd.argoproj.io/tracking-id \
       --set-exit-code --omit-header "$1" "$2"'
 
+eval "$(scmpuff init -s)"
