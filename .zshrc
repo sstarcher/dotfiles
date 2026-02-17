@@ -1,3 +1,5 @@
+
+export HELM_PLUGINS="$HOME/.local/share/helm/plugins"
 if command -v devbox &> /dev/null; then
   eval "$(devbox global shellenv --init-hook)"
 
@@ -43,9 +45,15 @@ export PATH=$GOPATH/bin:$PATH
 # gpg keychain
 export GPG_TTY=$(tty)
 
-# Iterm Title
+# Terminal Title (iTerm and tmux)
 precmd() {
+  # iTerm title
   echo -ne "\033];${${PWD##*/}: -15}\007"
+
+  # tmux window title
+  if [ -n "$TMUX" ]; then
+    tmux rename-window "$(basename "$PWD")"
+  fi
 }
 
 if [ $ITERM_SESSION_ID ]; then
@@ -78,4 +86,9 @@ export KUBECTL_EXTERNAL_DIFF='dyff between \
       --exclude=metadata.annotations.argocd.argoproj.io/tracking-id \
       --set-exit-code --omit-header "$1" "$2"'
 
+source ~/.secret_secret
+
 eval "$(scmpuff init -s)"
+export SSH_AUTH_SOCK=~/.ssh/ssh-agent.nix-old.sock
+if [ -f "/home/coder/.zshrc.user" ]; then source "/home/coder/.zshrc.user"; fi #user_dotfile
+if [ -f "/home/coder/lightspeed/infrastructure/shared/k8s-builder/files/.bash_aliases" ]; then source "/home/coder/lightspeed/infrastructure/shared/k8s-builder/files/.bash_aliases"; fi #lightspeed_aliases

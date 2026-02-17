@@ -28,7 +28,6 @@
     "watch@latest",
     "dyff@latest",
     "zoxide@latest",
-    "helmfile@latest",
     "nodePackages.diff2html-cli@latest",
     "kubernetes-helmPlugins.helm-diff@latest",
     "go@latest",
@@ -39,7 +38,9 @@
     "golangci-lint@latest",
     "zellij@latest",
     "cloud-custodian@latest",
-    "bundler@latest"
+    "bundler@latest",
+    "glab@latest",
+    "oras@latest"
   ],
   "env": {
     "HELM_PLUGINS": "$PWD/.devbox/nix/profile/default"
