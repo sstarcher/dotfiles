@@ -1,0 +1,175 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed *)",
+      "Bash(grep *)",
+      "Bash(ls *)",
+      "Bash(diff *)",
+      "Bash(echo *)",
+      "Bash(wc *)",
+      "Bash(head *)",
+      "Bash(cat *)",
+      "Bash(tail *)",
+      "Bash(jsonnet *)",
+      "Bash(cd *)",
+      "Bash(find *)",
+      "Bash(jq *)",
+      "Bash(git *)",
+      "Bash(glab api *)",
+      "Bash(glab ci *)",
+      "Bash(glab mr *)",
+      "Bash(glab issue *)",
+      "Bash(glab project *)",
+      "Bash(sleep *)",
+      "Bash(mkdir *)",
+      "Read(/home/coder/.claude-reviews/**)",
+      "Write(/home/coder/.claude-reviews/**)",
+      "Glob(/home/coder/.claude-reviews/**)"
+    ]
+  },
+  "model": "us.anthropic.claude-opus-4-6-v1",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-status.sh SessionStart"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-status.sh Stop"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-status.sh UserPromptSubmit"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-status.sh SessionEnd"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-status.sh PermissionRequest"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-status.sh PreToolUse"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-status.sh PostToolUse"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-status.sh PostToolUseFailure"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-status.sh IdlePrompt"
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-status.sh SubagentStart"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-status.sh SubagentStop"
+          }
+        ]
+      }
+    ],
+    "TeammateIdle": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-status.sh TeammateIdle"
+          }
+        ]
+      }
+    ],
+    "TaskCompleted": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-status.sh TaskCompleted"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-status.sh PreCompact"
+          }
+        ]
+      }
+    ]
+  },
+  "autoUpdatesChannel": "latest",
+  "skipDangerousModePermissionPrompt": true
+}

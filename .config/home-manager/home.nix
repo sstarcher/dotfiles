@@ -3,6 +3,8 @@
 {
   imports = [
     ./tmux.nix
+    ./git.nix
+    ./fzf.nix
   ];
 
   home.username = "coder";

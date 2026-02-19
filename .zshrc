@@ -93,10 +93,6 @@ export PIPENV_MAX_DEPTH=5
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-if [ -n "${commands[fzf-share]}" ]; then
-  source "$(fzf-share)/key-bindings.zsh"
-  source "$(fzf-share)/completion.zsh"
-fi
 
 export KUBECTL_EXTERNAL_DIFF='dyff between \
       --exclude=metadata.annotations.argocd.argoproj.io/tracking-id \
