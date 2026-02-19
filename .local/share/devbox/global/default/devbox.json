@@ -40,7 +40,8 @@
     "cloud-custodian@latest",
     "bundler@latest",
     "glab@latest",
-    "oras@latest"
+    "oras@latest",
+    "home-manager@latest"
   ],
   "env": {
     "HELM_PLUGINS": "$PWD/.devbox/nix/profile/default"

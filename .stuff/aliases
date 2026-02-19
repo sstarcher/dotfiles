@@ -6,24 +6,6 @@ sha_diverge(){
   export SHA=${1}; git log --pretty=oneline $(git merge-base origin/master ${SHA})..${SHA}
 }
 
-mt_reserve(){
-  product=$1
-  varient=$2
-  quantity=${3:-99999}
-  curl -s -X POST -F "product_id=$product" -F "variant_id=$varient"  -F 'uuid=modern-times-beer' -F "quantity=${quantity}" https://moderntimes.spcsg.net/client/cart/reserve
-}
-
-# curl --cookie $COOKIES -X POST  'https://www.moderntimesmerch.com/cart/add.js?id=34045774200891&quantity=1'
-mt_count(){
-  echo $1
-  shift
-  mt_reserve $@ | jq .available
-}
-
-mt(){
-  mt_count 'Chaos Grid' 5001112617019 34045774200891; mt_count 'Abaddon' 5001095839803 34045727440955; mt_count MDT 5001099411515 34045747265595
-}
-
 tf(){
     terraform "$@" | landscape
 }
@@ -70,56 +52,6 @@ tag(){
     git push origin "$TAG"
 
     gren release -D commits
-}
-
-function brew() {
-    local dump=false;
-    if [[ $# -gt 0 ]]; then
-        case "$1" in
-            *install|*tap)
-                dump=true;
-                ;;
-            cask)
-                if [[ $# -gt 2 ]]; then
-                    case "$2" in
-                        *install)
-                            dump=true;
-                            ;;
-                    esac
-                fi
-                ;;
-        esac
-    fi
-    command brew "$@"
-
-    if $dump; then
-        echo "Updating Brewfile"
-        command brew bundle dump --force --file="$HOME/Brewfile"
-    fi
-}
-
-notify(){
-    osascript -e "display notification \"$@\""
-}
-
-# key with newlines to literal newlines
-newline(){
- sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g' $@
-}
-
-# Single line key and insert newlines
-newline_from_single(){
-    sed -e "s/-----BEGIN RSA PRIVATE KEY-----/&\n/"\
-    -e "s/-----END RSA PRIVATE KEY-----/\n&/"\
-    -e "s/\S\{64\}/&\n/g"\
-    $@
-}
-
-newline_from_single_cert(){
-    sed -e "s/-----BEGIN CERTIFICATE-----/&\n/"\
-    -e "s/-----END CERTIFICATE-----/\n&/"\
-    -e "s/\S\{64\}/&\n/g"\
-    $@
 }
 
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
@@ -177,18 +109,8 @@ func tf(){
     esac
 }
 
-func tt(){
-    find-envs
-    if [ -f "Makefile" ]; then
-        tf "$@"
-    else
-        tg "$@"
-    fi
-}
-
-alias resin='rsync -r  ~/Documents/Resin/ctb/ /Volumes/emmc/'
-
 alias no_ansi="sed 's/\x1b\[[0-9;]*m//g'"
 alias openssl_crt='openssl x509 -noout -modulus -in'
 alias openssl_key='openssl rsa -noout -modulus -in'
 alias openssl_csr='openssl req -noout -modulus -in'
+

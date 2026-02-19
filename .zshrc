@@ -52,7 +52,20 @@ precmd() {
 
   # tmux window title
   if [ -n "$TMUX" ]; then
-    tmux rename-window "$(basename "$PWD")"
+    REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [ -n "$REPO_ROOT" ]; then
+      REPO_NAME=$(basename "$REPO_ROOT")
+      if [ "$REPO_ROOT" = "$PWD" ]; then
+        # At git root, show only repo name
+        tmux rename-window "${REPO_NAME}"
+      else
+        # In a subdirectory, show both
+        CURRENT_DIR=$(basename "$PWD")
+        tmux rename-window "${REPO_NAME}/${CURRENT_DIR}"
+      fi
+    else
+      tmux rename-window "$(basename "$PWD")"
+    fi
   fi
 }
 

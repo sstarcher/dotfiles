@@ -518,6 +518,10 @@
         }
       }
     },
+    "github:NixOS/nixpkgs/nixpkgs-unstable": {
+      "last_modified": "2026-01-27T15:18:14Z",
+      "resolved": "github:NixOS/nixpkgs/afce96367b2e37fc29afb5543573cd49db3357b7?lastModified=1769527094&narHash=sha256-xV20Alb7ZGN7qujnsi5lG1NckSUmpIb05H2Xar73TDc%3D"
+    },
     "glab@latest": {
       "last_modified": "2025-12-31T03:27:36Z",
       "resolved": "github:NixOS/nixpkgs/f665af0cdb70ed27e1bd8f9fdfecaf451260fc55#glab",
@@ -704,6 +708,54 @@
             }
           ],
           "store_path": "/nix/store/pjh8k3pnrfaj7riis0s5addqx3v4jbrn-goreleaser-2.2.0"
+        }
+      }
+    },
+    "home-manager@latest": {
+      "last_modified": "2026-02-13T23:34:13Z",
+      "resolved": "github:NixOS/nixpkgs/7d2ae6d8b8b697b5114a4249d0d958ee5f23d8fe#home-manager",
+      "source": "devbox-search",
+      "version": "0-unstable-2026-02-09",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/5sn152rbkgbdph9wbyl74qpf89602v2a-home-manager-0-unstable-2026-02-09",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/5sn152rbkgbdph9wbyl74qpf89602v2a-home-manager-0-unstable-2026-02-09"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/yjqh8hpmd4qp2aj4kb1xr50mgnjy8gh8-home-manager-0-unstable-2026-02-09",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/yjqh8hpmd4qp2aj4kb1xr50mgnjy8gh8-home-manager-0-unstable-2026-02-09"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/29682mq5ljlk383ya4y2zmdlxmpx5rzh-home-manager-0-unstable-2026-02-09",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/29682mq5ljlk383ya4y2zmdlxmpx5rzh-home-manager-0-unstable-2026-02-09"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/sci4hglwxzwkyawkkxjcihy352sh9h95-home-manager-0-unstable-2026-02-09",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/sci4hglwxzwkyawkkxjcihy352sh9h95-home-manager-0-unstable-2026-02-09"
         }
       }
     },
