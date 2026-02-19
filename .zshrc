@@ -3,7 +3,10 @@ export HELM_PLUGINS="$HOME/.local/share/helm/plugins"
 if command -v devbox &> /dev/null; then
   eval "$(devbox global shellenv --init-hook)"
 
-  source $(devbox global path)/.devbox/nix/profile/default/share/antidote/antidote.zsh 
+  # Apply home-manager config if changed
+  home-manager switch &>/dev/null &!
+
+  source $(devbox global path)/.devbox/nix/profile/default/share/antidote/antidote.zsh
   antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 fi
 
