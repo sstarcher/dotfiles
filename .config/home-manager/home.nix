@@ -5,7 +5,7 @@
     ./tmux.nix
     ./git.nix
     ./fzf.nix
-  ];
+  ] ++ (if builtins.pathExists ./work.nix then [ ./work.nix ] else [ ]);
 
   home.username = "coder";
   home.homeDirectory = "/home/coder";

@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 {
   programs.git = {
     enable = true;
@@ -8,7 +8,7 @@
     settings = {
       user = {
         name = "Shane Starcher";
-        email = "shane.starcher@gmail.com";
+        email = lib.mkDefault "shane.starcher@gmail.com";
       };
       alias.amend = "commit --amend --no-edit";
       push = {
@@ -16,7 +16,6 @@
         autoSetupRemote = true;
       };
       pull.ff = "only";
-      core.sshcommand = "/usr/bin/ssh";
       color = {
         ui = true;
         diff = {
