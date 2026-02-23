@@ -36,7 +36,10 @@
       set -g status-style "bg=black,fg=white"
       set -g status-left-style "bg=black,fg=white"
       set -g status-right-style "bg=black,fg=white"
-      set -g window-status-current-style "bg=black,fg=green"
+      set -g window-status-current-style "bg=black,fg=green,bold,underscore"
+      set -g window-status-current-format " [#I:#W] "
+      set -g window-status-format "  #I:#W  "
+      set -g window-status-style "fg=colour245,dim"
 
       # Visual indicator for prefix and copy mode
       set -g status-left "#{?client_prefix,#[bg=yellow#,fg=black] PREFIX ,#{?pane_in_mode,#[bg=magenta#,fg=white] COPY ,#[bg=black#,fg=white] #S }}"
