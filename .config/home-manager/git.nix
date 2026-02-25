@@ -4,6 +4,12 @@
     enable = true;
     ignores = [
       ".claude"
+      "*.code-workspace"
+      ".env*"
+      "*.pem"
+      "*.key"
+      ".secret*"
+      "credentials.json"
     ];
     settings = {
       user = {

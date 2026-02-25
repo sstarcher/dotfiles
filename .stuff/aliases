@@ -6,10 +6,6 @@ sha_diverge(){
   export SHA=${1}; git log --pretty=oneline $(git merge-base origin/master ${SHA})..${SHA}
 }
 
-tf(){
-    terraform "$@" | landscape
-}
-
 patch(){
     git checkout master
     git pull
@@ -91,22 +87,6 @@ find-envs () {
     fi
     dir=${dir%/*}
   done
-}
-
-func tg(){
-    case "$@" in
-        *plan* ) ;&
-        *apply* ) terragrunt "$@" -input=false | landscape ;;
-        * ) terragrunt "$@" ;;
-    esac
-}
-
-func tf(){
-    case "$@" in
-        *plan*) ;&
-        *apply*) terraform "$@" -input=false | landscape ;;
-        *) terraform "$@" ;;
-    esac
 }
 
 alias no_ansi="sed 's/\x1b\[[0-9;]*m//g'"

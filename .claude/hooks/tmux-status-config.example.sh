@@ -52,14 +52,14 @@
 # ============================================================================
 # Current Defaults (if not overridden)
 # ============================================================================
-# CLAUDE_COLOR_PROCESSING=cyan             # User input being processed
-# CLAUDE_COLOR_PROCESSING_CURRENT=cyan,bold
+# CLAUDE_COLOR_PROCESSING="fg=white,bg=colour21"             # Deep blue - processing
+# CLAUDE_COLOR_PROCESSING_CURRENT="fg=white,bg=colour21,bold"
 #
-# CLAUDE_COLOR_FINISHED=green              # Claude finished working
-# CLAUDE_COLOR_FINISHED_CURRENT=green,bold
+# CLAUDE_COLOR_FINISHED="fg=white,bg=colour22"               # Deep green - finished
+# CLAUDE_COLOR_FINISHED_CURRENT="fg=white,bg=colour22,bold"
 #
-# CLAUDE_COLOR_WAITING=red                 # Waiting for permission/teammate
-# CLAUDE_COLOR_WAITING_CURRENT=red,bold
+# CLAUDE_COLOR_WAITING="fg=white,bg=colour88"                # Dark red - waiting for permission
+# CLAUDE_COLOR_WAITING_CURRENT="fg=white,bg=colour88,bold"
 #
-# CLAUDE_COLOR_DEFAULT=default             # Session ended or /done called
+# CLAUDE_COLOR_DEFAULT=default                                # Session ended or /done called
 # CLAUDE_COLOR_DEFAULT_CURRENT=default
