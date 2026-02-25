@@ -6,7 +6,7 @@
     escapeTime = 0;  # Faster escape time for better responsiveness
     keyMode = "vi";
     terminal = "screen-256color";
-    historyLimit = 100000;
+    historyLimit = 20000;
     mouse = false;
 
     plugins = with pkgs; [
@@ -84,7 +84,6 @@
 
       # New window retaining current directory
       bind c new-window -c "#{pane_current_path}"
-      bind -n C-t new-window -c "#{pane_current_path}"
 
       # Rename session and window
       bind r command-prompt -I "#{window_name}" "rename-window '%%'"
@@ -112,22 +111,21 @@
            'swap-pane -s "!"' \
            'select-pane -t:.1 ; swap-pane -d -t 1 -s "!"'
 
-      # Window navigation
-      bind -n C-p previous-window
-      bind -n C-n next-window
+      # Window navigation (use standard prefix+n/prefix+p)
+      # Removed C-n/C-p bindings - they conflict with shell history
       bind -r Tab last-window
 
-      # Move windows
-      bind-key -n M-p swap-window -t -1 \; previous-window
-      bind-key -n M-n swap-window -t +1 \; next-window
+      # Move windows (Alt+Shift+Left/Right is more standard)
+      # Removed M-n/M-p - use prefix+< and prefix+> instead (standard)
+      # bind-key -n M-p swap-window -t -1 \; previous-window
+      # bind-key -n M-n swap-window -t +1 \; next-window
 
       # Zoom pane
       bind + resize-pane -Z
 
-      # Kill shortcuts
-      bind x kill-window
+      # Kill shortcuts (using standard bindings)
+      # prefix+x kills pane (standard), prefix+& kills window (standard)
       bind C-x confirm-before -p "kill other windows? (y/n)" "kill-window -a"
-      bind Q confirm-before -p "kill-session #S? (y/n)" kill-session
 
       # Merge session windows
       bind C-u command-prompt -p "Session to merge with: " \
@@ -154,8 +152,7 @@
       # ===     Copy mode, scroll and clipboard      ===
       # ================================================
 
-      # Trigger copy mode
-      bind -n C-u copy-mode
+      # Use standard prefix+[ for copy mode (removed non-standard Ctrl+u)
 
       # Vi-style selection
       unbind-key -T copy-mode-vi v
@@ -177,6 +174,11 @@
       # Copy shortcuts
       bind p paste-buffer
       bind C-p choose-buffer
+
+      # Override yank plugin to use OSC 52 (for remote/container clipboard)
+      # This uses tmux's built-in copy-selection which respects set-clipboard on
+      bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+      bind -T copy-mode-vi Enter send-keys -X copy-selection-and-cancel
 
       # Y copies whole line, D copies to end of line
       bind -T copy-mode-vi Y send-keys -X copy-line
@@ -304,14 +306,6 @@
       # Kill all other panes (keep only current)
       bind K run-shell "tmux kill-pane -a"
 
-      # AI Agents layout (3 left | 2 center | 3 right)
-      bind A split-window -h -p 75 \; \
-             split-window -h -p 66 \; \
-             select-pane -t 0 \; split-window -v \; split-window -v \; \
-             select-pane -t 3 \; split-window -v \; \
-             select-pane -t 5 \; split-window -v \; split-window -v \; \
-             select-pane -t 3
-
       # Team layout reorganizer (reorganize existing panes into 3-column structure)
       # Also triggers automatically via Claude hooks (TeammateIdle)
       bind t run-shell '~/.tmux/team-layout.sh'
@@ -322,6 +316,13 @@
 
       # Reset auto-layout flag (allow automatic reorganization to trigger again)
       bind R set-option -wu @team_layout_auto_applied \; display-message "Auto-layout re-enabled"
+
+      # =====================================
+      # ===   Plugin Initialization       ===
+      # =====================================
+      # Re-run prefix-highlight plugin after status-left is configured
+      # (plugins run before extraConfig, so we need to re-execute it here)
+      run-shell ${pkgs.tmuxPlugins.prefix-highlight}/share/tmux-plugins/prefix-highlight/prefix_highlight.tmux
     '';
   };
 }
