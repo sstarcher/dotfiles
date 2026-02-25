@@ -27,6 +27,8 @@
           set -g @prefix_highlight_bg "$color_secondary"
           set -g @prefix_highlight_show_copy_mode 'on'
           set -g @prefix_highlight_copy_mode_attr "fg=$color_dark,bg=$color_secondary"
+          set -g @prefix_highlight_prefix_prompt 'PREFIX'
+          set -g @prefix_highlight_copy_prompt 'COPY'
         '';
       }
       {
@@ -230,6 +232,18 @@
         refresh-client -S
 
       # =====================================
+      # ===   Pane styling                ===
+      # =====================================
+
+      # Pane borders - dim inactive pane borders
+      set -g pane-border-style "fg=colour235"
+      set -g pane-active-border-style "fg=colour245"
+
+      # Dim inactive panes significantly
+      set -g window-style "fg=colour240,bg=colour234"
+      set -g window-active-style "fg=colour250,bg=colour232"
+
+      # =====================================
       # ===   Status line                 ===
       # =====================================
 
@@ -253,12 +267,12 @@
       # Note: Window status colors are dynamically managed by Claude hooks
       # See ~/.claude/hooks/tmux-status.sh for color management
 
-      # Status bar left and right
-      set -g status-left "[#{session_name}] "
-      set -g status-left-length 20
+      # Status bar left and right - prefix/copy mode indicator shown first
+      set -g status-left "#{prefix_highlight} [#{session_name}]"
+      set -g status-left-length 40
 
-      set -g status-right "#{prefix_highlight} | %H:%M %d-%b-%y"
-      set -g status-right-length 60
+      set -g status-right "%H:%M %d-%b-%y"
+      set -g status-right-length 40
 
       # =====================================
       # ===   Plugin Configuration        ===
