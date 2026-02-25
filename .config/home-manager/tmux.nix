@@ -7,7 +7,7 @@
     keyMode = "vi";
     terminal = "screen-256color";
     historyLimit = 100000;
-    mouse = true;  # Hold Shift while selecting to use system clipboard
+    mouse = false;
 
     plugins = with pkgs; [
       tmuxPlugins.sensible

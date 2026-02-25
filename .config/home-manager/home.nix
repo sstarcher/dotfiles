@@ -4,6 +4,7 @@
   imports = [
     ./tmux.nix
     ./git.nix
+    ./zsh.nix
     ./fzf.nix
     ./zoxide.nix
   ] ++ (if builtins.pathExists ./work.nix then [ ./work.nix ] else [ ]);

@@ -32,7 +32,6 @@
     "kubernetes-helmPlugins.helm-diff@latest",
     "go@latest",
     "scmpuff@latest",
-    "antidote@latest",
     "strace@latest",
     "trivy@latest",
     "golangci-lint@latest",
