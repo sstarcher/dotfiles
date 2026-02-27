@@ -7,7 +7,7 @@
     keyMode = "vi";
     terminal = "screen-256color";
     historyLimit = 20000;
-    mouse = false;
+    mouse = true;
 
     plugins = with pkgs; [
       tmuxPlugins.sensible
@@ -101,10 +101,6 @@
       bind-key H resize-pane -L 5
       bind-key L resize-pane -R 5
 
-      # Select panes
-      bind -r [ select-pane -t :.-
-      bind -r ] select-pane -t :.+
-
       # Swap panes
       bind -r C-o swap-pane -D
       bind \\ if '[ #{pane_index} -eq 1 ]' \
@@ -170,6 +166,22 @@
       # Mouse wheel scroll speed (10 lines at a time)
       bind -T copy-mode-vi WheelUpPane       select-pane \; send-keys -X -N 10 scroll-up
       bind -T copy-mode-vi WheelDownPane     select-pane \; send-keys -X -N 10 scroll-down
+
+      # Restore [ to copy-mode (pain-control plugin overrides it)
+      bind [ copy-mode
+
+      # Scroll threshold: require 3 scroll-up events within 1 second to enter copy mode
+      # This prevents accidental copy mode entry from slight scrolling
+      bind -T root WheelUpPane if-shell -F -t = "#{alternate_on}" \
+        "send-keys -M" \
+        "select-pane -t =; run-shell ~/.tmux/scroll-threshold.sh"
+
+      # Scroll down just sends events (doesn't trigger copy mode)
+      bind -T root WheelDownPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; send-keys -M"
+
+      # Prevent accidental copy mode via mouse drag when clicking
+      unbind -T root MouseDrag1Pane
+      unbind -T root MouseDragEnd1Pane
 
       # Copy shortcuts
       bind p paste-buffer
