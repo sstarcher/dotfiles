@@ -40,7 +40,7 @@
     "bundler@latest",
     "glab@latest",
     "oras@latest",
-    "home-manager@latest"
+    "home-manager@0-unstable-2024-05-30"
   ],
   "env": {
     "HELM_PLUGINS": "$PWD/.devbox/nix/profile/default"

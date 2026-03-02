@@ -11,7 +11,7 @@
       ".secret*"
       "credentials.json"
     ];
-    settings = {
+    extraConfig = {
       user = {
         name = "Shane Starcher";
         email = lib.mkDefault "shane.starcher@gmail.com";
