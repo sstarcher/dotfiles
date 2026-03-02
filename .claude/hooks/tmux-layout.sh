@@ -27,8 +27,8 @@ if [ -z "${TMUX_PANE}" ]; then
     if [ -n "${TMUX}" ]; then
         TMUX_PANE=$(tmux display-message -p '#{pane_id}')
     else
-        log_and_echo "[$(date '+%Y-%m-%d %H:%M:%S')] ERROR: $EVENT_TYPE not in tmux"
-        exit 1
+        # Not in tmux, silently return
+        exit 0
     fi
 fi
 
