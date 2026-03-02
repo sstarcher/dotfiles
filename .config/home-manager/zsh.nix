@@ -17,7 +17,6 @@
     GOPATH = "$HOME/go";
     GO111MODULE = "auto";
     PIPENV_MAX_DEPTH = "5";
-    SSH_AUTH_SOCK = "~/.ssh/ssh-agent.nix-old.sock";
     ZSH_HIGHLIGHT_MAXLENGTH = "200";
     KUBECTL_EXTERNAL_DIFF = "dyff between --exclude=metadata.annotations.argocd.argoproj.io/tracking-id --set-exit-code --omit-header \"$1\" \"$2\"";
   };
