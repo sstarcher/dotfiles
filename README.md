@@ -10,11 +10,3 @@ yadm clone git@github.com:sstarcher/dotfiles.git
 ~/install.sh
 ```
 
- # Install VSCode CLI
-
-From VSCode `SHIFT+CMD+P` type `shell command install`
-
-# Install Kinesis Freestyle Edge RGB
-
-https://gaming.kinesis-ergo.com/fs-edge-rgb-support/#smartset
-
