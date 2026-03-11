@@ -6,6 +6,7 @@
   home.packages = with pkgs; [
     zsh-powerlevel10k
     zsh-syntax-highlighting
+    zsh-autosuggestions
   ];
 
   # Environment variables (will be in ~/.nix-profile/etc/profile.d/hm-session-vars.sh)
@@ -99,6 +100,11 @@
     # Load Powerlevel10k theme
     if [ -d "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k" ]; then
       source "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme"
+    fi
+
+    # Load autosuggestions
+    if [ -d "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions" ]; then
+      source "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
     fi
 
     # Load syntax highlighting
