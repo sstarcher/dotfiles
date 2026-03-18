@@ -1,0 +1,31 @@
+{
+  "mcpServers": {
+    "awslabs-aws-documentation-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.aws-documentation-mcp-server@latest"],
+      "env": {
+        "AWS_DOCUMENTATION_PARTITION": "aws",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "k8s": {
+      "command": "npx",
+      "args": ["-y", "kubernetes-mcp-server@latest"]
+    },
+    "aws-knowledge-mcp-server": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://knowledge-mcp.global.api.aws"]
+    },
+    "awslabs.eks-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.eks-mcp-server@latest", "--allow-write", "--allow-sensitive-data-access"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "terraform": {
+      "command": "npx",
+      "args": ["-y", "terraform-mcp-server@latest", "--toolsets", "registry"]
+    }
+  }
+}
