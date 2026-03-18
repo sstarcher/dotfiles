@@ -17,16 +17,16 @@
       "Bash(find *)",
       "Bash(jq *)",
       "Bash(git *)",
-      "Bash(glab api *)",
-      "Bash(glab ci *)",
-      "Bash(glab mr *)",
-      "Bash(glab issue *)",
-      "Bash(glab project *)",
+      "Bash(xxd *)",
+      "Bash(* | xxd)",
+      "Bash(* | xxd *)",
+      "Bash(git * && echo * && git *)",
+      "Bash(tail * && echo * && tail *)",
+      "Bash(head * && echo * && head *)",
+      "Bash(glab *)",
+      "Bash(aws *)",
       "Bash(sleep *)",
-      "Bash(mkdir *)",
-      "Read(/home/coder/.claude-reviews/**)",
-      "Write(/home/coder/.claude-reviews/**)",
-      "Glob(/home/coder/.claude-reviews/**)"
+      "Bash(mkdir *)"
     ]
   },
   "model": "us.anthropic.claude-opus-4-6-v1",
@@ -181,5 +181,12 @@
     ]
   },
   "autoUpdatesChannel": "latest",
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "enabledMcpjsonServers": [
+    "awslabs-aws-documentation-mcp-server",
+    "k8s",
+    "aws-knowledge-mcp-server",
+    "awslabs.eks-mcp-server",
+    "terraform"
+  ]
 }
