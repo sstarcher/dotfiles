@@ -18,6 +18,7 @@
   ];
 
   home.file = {
+    ".tmux/resurrect/.keep".text = "";
   };
 
   home.sessionVariables = {
