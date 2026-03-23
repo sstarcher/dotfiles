@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 {
   programs.git = {
     enable = true;
@@ -14,7 +14,6 @@
     extraConfig = {
       user = {
         name = "Shane Starcher";
-        email = lib.mkDefault "shane.starcher@gmail.com";
       };
       alias.amend = "commit --amend --no-edit";
       push = {
