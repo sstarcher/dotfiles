@@ -46,6 +46,12 @@
         extraConfig = ''
           set -g @continuum-restore 'on'
           set -g @continuum-save-interval '30' # minutes
+
+          # Set status-right here (before continuum loads) so continuum can
+          # inject its auto-save hook into it. Do NOT set status-right in
+          # extraConfig or it will overwrite continuum's hook.
+          set -g status-right "%H:%M %d-%b-%y"
+          set -g status-right-length 40
         '';
       }
     ];
@@ -285,8 +291,8 @@
       set -g status-left "#{prefix_highlight} [#{session_name}]"
       set -g status-left-length 40
 
-      set -g status-right "%H:%M %d-%b-%y"
-      set -g status-right-length 40
+      # status-right is set in the continuum plugin extraConfig above,
+      # so continuum can inject its auto-save hook. Do not set it here.
 
       # =====================================
       # ===   Plugin Configuration        ===
