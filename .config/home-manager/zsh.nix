@@ -15,6 +15,12 @@
     # Managed by home-manager
     # This file is sourced by the system .zshrc
 
+    # Ensure yadm always uses personal email
+    if command -v yadm &> /dev/null && [ "$(yadm gitconfig user.email)" != "shane.starcher@gmail.com" ]; then
+      yadm gitconfig user.email "shane.starcher@gmail.com"
+      yadm gitconfig user.name "Shane Starcher"
+    fi
+
     # devbox initialization (before p10k instant prompt to avoid console output warnings)
     if command -v devbox &> /dev/null; then
       eval "$(devbox global shellenv --init-hook 2>/dev/null)"
