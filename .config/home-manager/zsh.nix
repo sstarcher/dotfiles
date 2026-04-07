@@ -9,37 +9,25 @@
     zsh-autosuggestions
   ];
 
-  # Environment variables (will be in ~/.nix-profile/etc/profile.d/hm-session-vars.sh)
-  home.sessionVariables = {
-    HELM_PLUGINS = "$HOME/.local/share/helm/plugins";
-    VISUAL = "vim";
-    EDITOR = "vim";
-    TERMINAL = "urxvtc";
-    GOPATH = "$HOME/go";
-    GO111MODULE = "auto";
-    PIPENV_MAX_DEPTH = "5";
-    ZSH_HIGHLIGHT_MAXLENGTH = "200";
-    KUBECTL_EXTERNAL_DIFF = "dyff between --exclude=metadata.annotations.argocd.argoproj.io/tracking-id --set-exit-code --omit-header \"$1\" \"$2\"";
-  };
 
   # Manage .zshrc.user instead of .zshrc
   home.file.".zshrc.user".text = ''
     # Managed by home-manager
     # This file is sourced by the system .zshrc
 
-    # devbox initialization (must run first)
+    # devbox initialization (before p10k instant prompt to avoid console output warnings)
     if command -v devbox &> /dev/null; then
-      eval "$(devbox global shellenv --init-hook)"
+      eval "$(devbox global shellenv --init-hook 2>/dev/null)"
 
       # Apply home-manager config only if changed (avoid unnecessary rebuilds)
       HM_MARKER="$HOME/.local/state/home-manager/.last-switch-ts"
-      if [ ! -f "$HM_MARKER" ] || [ ~/.config/home-manager -nt "$HM_MARKER" ]; then
+      if [ ! -f "$HM_MARKER" ] || [ -n "$(find ~/.config/home-manager -newer "$HM_MARKER" -name '*.nix' 2>/dev/null)" ]; then
         home-manager switch &>/dev/null &!
         touch "$HM_MARKER"
       fi
     fi
 
-    # Enable Powerlevel10k instant prompt
+    # Enable Powerlevel10k instant prompt (after devbox to avoid console output warnings)
     if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
       source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
     fi
@@ -56,11 +44,21 @@
     setopt AUTO_CD
 
     # Completion
-    autoload -U compinit && compinit
+    autoload -U compinit && compinit -C
     zstyle :compinstall filename "$HOME/.zshrc"
 
     # GPG TTY
     export GPG_TTY=$(tty)
+
+    # Environment variables
+    export HELM_PLUGINS="$HOME/.local/share/helm/plugins"
+    export VISUAL="vim"
+    export EDITOR="vim"
+    export GOPATH="$HOME/go"
+    export GO111MODULE="auto"
+    export PIPENV_MAX_DEPTH="5"
+    export ZSH_HIGHLIGHT_MAXLENGTH="200"
+    export KUBECTL_EXTERNAL_DIFF="dyff between --exclude=metadata.annotations.argocd.argoproj.io/tracking-id --set-exit-code --omit-header \"$1\" \"$2\""
 
     # PATH additions
     export PATH="$GOPATH/bin:$PATH"
