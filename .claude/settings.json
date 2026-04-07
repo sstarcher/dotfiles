@@ -26,7 +26,8 @@
       "Bash(glab *)",
       "Bash(aws *)",
       "Bash(sleep *)",
-      "Bash(mkdir *)"
+      "Bash(mkdir *)",
+      "Bash(gofmt *)"
     ]
   },
   "model": "us.anthropic.claude-opus-4-6-v1",
