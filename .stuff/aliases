@@ -94,3 +94,46 @@ alias openssl_crt='openssl x509 -noout -modulus -in'
 alias openssl_key='openssl rsa -noout -modulus -in'
 alias openssl_csr='openssl req -noout -modulus -in'
 
+# Checkout (or update) a GitLab MR by ID, forcing local branch to match remote.
+# Usage: mr <MR_ID>
+# Override remote with MR_REMOTE=upstream mr 651
+mr() {
+  local mr_id="${1:?usage: mr <MR_ID>}"
+  local remote="${MR_REMOTE:-origin}"
+
+  local branch
+  branch=$(glab mr view "$mr_id" --output json 2>/dev/null | jq -r '.source_branch')
+  if [[ -z "$branch" || "$branch" == "null" ]]; then
+    echo "mr: could not resolve source branch for MR !$mr_id" >&2
+    return 1
+  fi
+
+  echo "mr: MR !$mr_id -> $branch"
+
+  git fetch "$remote" "$branch" || return 1
+
+  if ! git diff-index --quiet HEAD -- 2>/dev/null; then
+    echo "mr: refusing to proceed — you have uncommitted changes" >&2
+    git status --short >&2
+    return 1
+  fi
+
+  if git rev-parse --verify --quiet "$branch" >/dev/null; then
+    local ahead
+    ahead=$(git rev-list --count "FETCH_HEAD..$branch" 2>/dev/null)
+    if [[ "${ahead:-0}" -gt 0 ]]; then
+      echo "mr: local '$branch' has $ahead commit(s) not on $remote. Aborting." >&2
+      echo "  Inspect with: git log --oneline ${remote}/${branch}..${branch}" >&2
+      return 1
+    fi
+    git checkout "$branch" || return 1
+    git reset --hard FETCH_HEAD || return 1
+  else
+    git checkout -b "$branch" FETCH_HEAD || return 1
+  fi
+
+  git branch --set-upstream-to="${remote}/${branch}" "$branch" >/dev/null
+
+  echo "mr: now on $branch @ $(git rev-parse --short HEAD)"
+}
+
