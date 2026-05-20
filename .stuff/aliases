@@ -95,10 +95,25 @@ alias openssl_key='openssl rsa -noout -modulus -in'
 alias openssl_csr='openssl req -noout -modulus -in'
 
 # Checkout (or update) a GitLab MR by ID, forcing local branch to match remote.
-# Usage: mr <MR_ID>
+# Usage: mr <MR_ID> [-f|--force]
+#   -f, --force   discard local-only commits and uncommitted changes
 # Override remote with MR_REMOTE=upstream mr 651
 mr() {
-  local mr_id="${1:?usage: mr <MR_ID>}"
+  local force=0
+  local mr_id=""
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -f|--force) force=1; shift ;;
+      -h|--help)
+        echo "usage: mr <MR_ID> [-f|--force]"
+        return 0 ;;
+      *) mr_id="$1"; shift ;;
+    esac
+  done
+  if [[ -z "$mr_id" ]]; then
+    echo "usage: mr <MR_ID> [-f|--force]" >&2
+    return 1
+  fi
   local remote="${MR_REMOTE:-origin}"
 
   local branch
@@ -112,19 +127,36 @@ mr() {
 
   git fetch "$remote" "$branch" || return 1
 
+  # Stash for safety on --force, otherwise refuse on dirty tree.
+  local stashed=0
   if ! git diff-index --quiet HEAD -- 2>/dev/null; then
-    echo "mr: refusing to proceed — you have uncommitted changes" >&2
-    git status --short >&2
-    return 1
+    if [[ $force -eq 1 ]]; then
+      local stash_msg="mr-force-$(date +%s)"
+      if git stash push -u -m "$stash_msg" >/dev/null; then
+        stashed=1
+        echo "mr: stashed uncommitted changes as '$stash_msg' (recover with: git stash list / git stash pop)"
+      fi
+    else
+      echo "mr: refusing to proceed — you have uncommitted changes (use -f to stash and force)" >&2
+      git status --short >&2
+      return 1
+    fi
   fi
 
   if git rev-parse --verify --quiet "$branch" >/dev/null; then
     local ahead
     ahead=$(git rev-list --count "FETCH_HEAD..$branch" 2>/dev/null)
-    if [[ "${ahead:-0}" -gt 0 ]]; then
+    if [[ "${ahead:-0}" -gt 0 && $force -eq 0 ]]; then
       echo "mr: local '$branch' has $ahead commit(s) not on $remote. Aborting." >&2
       echo "  Inspect with: git log --oneline ${remote}/${branch}..${branch}" >&2
+      echo "  Re-run with -f to discard them (a backup ref will be created)." >&2
+      [[ $stashed -eq 1 ]] && git stash pop >/dev/null
       return 1
+    fi
+    if [[ "${ahead:-0}" -gt 0 ]]; then
+      local backup="backup/${branch}-$(date +%Y%m%d-%H%M%S)"
+      git update-ref "refs/heads/${backup}" "$branch"
+      echo "mr: backed up $ahead local commit(s) to branch '${backup}'"
     fi
     git checkout "$branch" || return 1
     git reset --hard FETCH_HEAD || return 1
