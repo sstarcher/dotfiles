@@ -519,6 +519,10 @@
         }
       }
     },
+    "github:NixOS/nixpkgs/nixpkgs-unstable": {
+      "last_modified": "2026-05-14T21:33:07Z",
+      "resolved": "github:NixOS/nixpkgs/8a1b0127302ea51e05bf4ea5a291743fac442406?lastModified=1778794387&narHash=sha256-BL04pOS9453Awkeb9f90XBJXBSkWxN%2BvB7HIgnL0iMM%3D"
+    },
     "glab@latest": {
       "last_modified": "2025-12-31T03:27:36Z",
       "resolved": "github:NixOS/nixpkgs/f665af0cdb70ed27e1bd8f9fdfecaf451260fc55#glab",
@@ -708,51 +712,51 @@
         }
       }
     },
-    "home-manager@0-unstable-2024-05-30": {
-      "last_modified": "2024-06-03T07:19:07Z",
-      "resolved": "github:NixOS/nixpkgs/4a4ecb0ab415c9fccfb005567a215e6a9564cdf5#home-manager",
+    "home-manager@latest": {
+      "last_modified": "2026-05-14T21:33:07Z",
+      "resolved": "github:NixOS/nixpkgs/8a1b0127302ea51e05bf4ea5a291743fac442406#home-manager",
       "source": "devbox-search",
-      "version": "0-unstable-2024-05-30",
+      "version": "0-unstable-2026-04-24",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/f17wzv20w394az9g1iqqvhb61iccchfc-home-manager-0-unstable-2024-05-30",
+              "path": "/nix/store/dhk9l3vkjw9abb5bgkd3g17nkqp7i51f-home-manager-0-unstable-2026-04-24",
               "default": true
             }
           ],
-          "store_path": "/nix/store/f17wzv20w394az9g1iqqvhb61iccchfc-home-manager-0-unstable-2024-05-30"
+          "store_path": "/nix/store/dhk9l3vkjw9abb5bgkd3g17nkqp7i51f-home-manager-0-unstable-2026-04-24"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/vgzfi7b161lwbrwy6pdl9fvk543s0h08-home-manager-0-unstable-2024-05-30",
+              "path": "/nix/store/jcim4j0n9irax5g978jlw8ni1gm42p1f-home-manager-0-unstable-2026-04-24",
               "default": true
             }
           ],
-          "store_path": "/nix/store/vgzfi7b161lwbrwy6pdl9fvk543s0h08-home-manager-0-unstable-2024-05-30"
+          "store_path": "/nix/store/jcim4j0n9irax5g978jlw8ni1gm42p1f-home-manager-0-unstable-2026-04-24"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/vsqrdn8mqlnq0hfl9kbrq3basxirn15g-home-manager-0-unstable-2024-05-30",
+              "path": "/nix/store/3ncffjp0lf3a32fyylqjlikhz8xqk3mq-home-manager-0-unstable-2026-04-24",
               "default": true
             }
           ],
-          "store_path": "/nix/store/vsqrdn8mqlnq0hfl9kbrq3basxirn15g-home-manager-0-unstable-2024-05-30"
+          "store_path": "/nix/store/3ncffjp0lf3a32fyylqjlikhz8xqk3mq-home-manager-0-unstable-2026-04-24"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/sdk4skbj5g9mp08jf118hnl7zigxj9zw-home-manager-0-unstable-2024-05-30",
+              "path": "/nix/store/b15qf4zdjfaz197x1llmapiyxg8qdsqk-home-manager-0-unstable-2026-04-24",
               "default": true
             }
           ],
-          "store_path": "/nix/store/sdk4skbj5g9mp08jf118hnl7zigxj9zw-home-manager-0-unstable-2024-05-30"
+          "store_path": "/nix/store/b15qf4zdjfaz197x1llmapiyxg8qdsqk-home-manager-0-unstable-2026-04-24"
         }
       }
     },
