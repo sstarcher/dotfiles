@@ -26,6 +26,10 @@
     "terraform": {
       "command": "npx",
       "args": ["-y", "terraform-mcp-server@latest", "--toolsets", "registry"]
+    },
+    "aws-multi-account": {
+      "command": "python3",
+      "args": ["/home/coder/bin/aws-multi-account-mcp"]
     }
   }
 }

@@ -133,5 +133,11 @@
     if command -v fzf &>/dev/null && [[ -o interactive ]]; then
       eval "$(fzf --zsh)"
     fi
+
+    # Remove devbox-injected model overrides so ~/.claude/settings.json controls models
+    unset ANTHROPIC_MODEL
+    unset ANTHROPIC_DEFAULT_OPUS_MODEL
+    unset ANTHROPIC_DEFAULT_SONNET_MODEL
+    unset ANTHROPIC_DEFAULT_HAIKU_MODEL
   '';
 }
