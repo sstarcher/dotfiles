@@ -2,8 +2,8 @@
 let
   claudeSettings = builtins.toJSON {
     env = {
-      ANTHROPIC_DEFAULT_OPUS_MODEL = "us.anthropic.claude-opus-5-v1";
-      ANTHROPIC_DEFAULT_SONNET_MODEL = "us.anthropic.claude-sonnet-5-v1";
+      ANTHROPIC_DEFAULT_OPUS_MODEL = "us.anthropic.claude-opus-5-5";
+      ANTHROPIC_DEFAULT_SONNET_MODEL = "us.anthropic.claude-sonnet-5";
       ANTHROPIC_SMALL_FAST_MODEL = "us.anthropic.claude-haiku-4-5-20251001-v1:0";
       ANTHROPIC_DEFAULT_HAIKU_MODEL = "us.anthropic.claude-haiku-4-5-20251001-v1:0";
     };
@@ -38,7 +38,7 @@ let
         "Bash(gofmt *)"
       ];
     };
-    model = "us.anthropic.claude-opus-5-v1";
+    model = "us.anthropic.claude-opus-5-5[1m]";
     enabledMcpjsonServers = [
       "awslabs-aws-documentation-mcp-server"
       "k8s"
