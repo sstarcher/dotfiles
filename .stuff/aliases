@@ -96,7 +96,8 @@ alias openssl_csr='openssl req -noout -modulus -in'
 
 # Checkout (or update) a GitLab MR by ID, forcing local branch to match remote.
 # Usage: mr <MR_ID> [-f|--force]
-#   -f, --force   discard local-only commits and uncommitted changes
+#   -f, --force   discard local-only commits and uncommitted changes, and remove
+#                 a worktree holding the branch even if it has uncommitted changes
 # Override remote with MR_REMOTE=upstream mr 651
 mr() {
   local force=0
@@ -141,6 +142,22 @@ mr() {
       git status --short >&2
       return 1
     fi
+  fi
+
+  # A branch checked out in another worktree can't be checked out here, so
+  # remove that worktree (refusing if it has uncommitted changes, unless -f).
+  local wt
+  wt=$(git worktree list --porcelain | awk -v ref="refs/heads/$branch" '
+    /^worktree /{path=substr($0, 10)} $0 == "branch " ref {print path}')
+  if [[ -n "$wt" && "$wt" != "$(git rev-parse --show-toplevel)" ]]; then
+    if [[ -n "$(git -C "$wt" status --porcelain 2>/dev/null)" && $force -eq 0 ]]; then
+      echo "mr: '$branch' is checked out in worktree $wt, which has uncommitted changes (use -f to remove it anyway)" >&2
+      git -C "$wt" status --short >&2
+      [[ $stashed -eq 1 ]] && git stash pop >/dev/null
+      return 1
+    fi
+    git worktree remove --force "$wt" || return 1
+    echo "mr: removed worktree $wt"
   fi
 
   if git rev-parse --verify --quiet "$branch" >/dev/null; then

@@ -27,14 +27,29 @@ fi
 
 (
     cd /usr/share/fonts/truetype/
-    sudo wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
-    sudo wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
-    sudo wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
-    sudo wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+    base="https://github.com/romkatv/powerlevel10k-media/raw/master"
+    for font in "MesloLGS NF Regular.ttf" "MesloLGS NF Bold.ttf" \
+                "MesloLGS NF Italic.ttf" "MesloLGS NF Bold Italic.ttf"; do
+        # -O overwrites in place instead of leaving .ttf.1/.2/... duplicates on re-runs.
+        [ -f "$font" ] || sudo wget -q -O "$font" "${base}/${font// /%20}"
+    done
 )
 
 #NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-sudo ln -s /bin/zsh /usr/local/bin/zsh
+[ -e /usr/local/bin/zsh ] || sudo ln -s /bin/zsh /usr/local/bin/zsh
 
-home-manager switch
+# Bootstrap home-manager if it isn't on PATH yet. This config uses the
+# programs.claude-code / programs.codex / programs.mcp modules, which currently
+# only exist in home-manager master (tracking nixpkgs-unstable), so pin both there.
+if ! command -v home-manager &> /dev/null; then
+    nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+    nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+    nix-channel --update
+    export NIX_PATH="${HOME}/.nix-defexpr/channels${NIX_PATH:+:$NIX_PATH}"
+    nix-shell '<home-manager>' -A install
+fi
+
+# -b backup moves pre-seeded files (e.g. ~/.aws/config, ~/.claude/settings.json)
+# aside instead of aborting the first switch.
+home-manager switch -b backup

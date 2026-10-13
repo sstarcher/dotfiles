@@ -76,8 +76,8 @@
       # iTerm title
       echo -ne "\033];''${''${PWD##*/}: -15}\007"
 
-      # tmux window title
-      if [ -n "$TMUX" ]; then
+      # tmux window title (skipped for windows pinned via prefix+,)
+      if [ -n "$TMUX" ] && [ -z "$(tmux show-options -wqv @pinned)" ]; then
         REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null)
         if [ -n "$REPO_ROOT" ]; then
           REPO_NAME=$(basename "$REPO_ROOT")

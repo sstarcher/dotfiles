@@ -2,6 +2,7 @@
 {
   programs.git = {
     enable = true;
+    signing.format = "openpgp";
     ignores = [
       ".claude"
       "*.code-workspace"
@@ -11,7 +12,7 @@
       ".secret*"
       "credentials.json"
     ];
-    extraConfig = {
+    settings = {
       user = {
         name = "Shane Starcher";
       };

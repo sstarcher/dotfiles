@@ -39,6 +39,7 @@ let
       ];
     };
     model = "us.anthropic.claude-opus-5-5[1m]";
+    tui = "default";
     enabledMcpjsonServers = [
       "awslabs-aws-documentation-mcp-server"
       "k8s"

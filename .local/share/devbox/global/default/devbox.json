@@ -28,7 +28,6 @@
     "watch@latest",
     "dyff@latest",
     "zoxide@latest",
-    "nodePackages.diff2html-cli@latest",
     "kubernetes-helmPlugins.helm-diff@latest",
     "go@latest",
     "scmpuff@latest",

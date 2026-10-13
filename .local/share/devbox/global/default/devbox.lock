@@ -519,10 +519,6 @@
         }
       }
     },
-    "github:NixOS/nixpkgs/nixpkgs-unstable": {
-      "last_modified": "2026-08-19T20:44:59Z",
-      "resolved": "github:NixOS/nixpkgs/07e1d92cdc0ed416cfa11ff3ca40d17e61cfba7a?lastModified=1787172299&narHash=sha256-PShzS87awOlE5XWkxUGBd%2F58%2FF%2BAtE2ZMgFffKj4r8s%3D"
-    },
     "glab@latest": {
       "last_modified": "2025-12-31T03:27:36Z",
       "resolved": "github:NixOS/nixpkgs/f665af0cdb70ed27e1bd8f9fdfecaf451260fc55#glab",
@@ -1235,53 +1231,6 @@
             }
           ],
           "store_path": "/nix/store/436vrw0zfhcjji9817y8k15xyx0za3yd-helm-diff-3.9.11"
-        }
-      }
-    },
-    "nodePackages.diff2html-cli@latest": {
-      "last_modified": "2024-10-13T23:44:06Z",
-      "resolved": "github:NixOS/nixpkgs/d4f247e89f6e10120f911e2e2d2254a050d0f732#nodePackages.diff2html-cli",
-      "source": "devbox-search",
-      "version": "5.2.15",
-      "systems": {
-        "aarch64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/2h6bb3ii9avhqc0lm8adwsv83fqnfnly-diff2html-cli-5.2.15",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/2h6bb3ii9avhqc0lm8adwsv83fqnfnly-diff2html-cli-5.2.15"
-        },
-        "aarch64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/r8c9gs5s57llbsxyffw7xv5k5ihrg6z3-diff2html-cli-5.2.15",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/r8c9gs5s57llbsxyffw7xv5k5ihrg6z3-diff2html-cli-5.2.15"
-        },
-        "x86_64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/f64lfk3cpqrlq9bzhynifq4xbias9wg3-diff2html-cli-5.2.15",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/f64lfk3cpqrlq9bzhynifq4xbias9wg3-diff2html-cli-5.2.15"
-        },
-        "x86_64-linux": {
-          "outputs": [
-            {
-              "path": "/nix/store/i1g8ayg7yl5c8s404jsyrifz80b22wvg-diff2html-cli-5.2.15",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/i1g8ayg7yl5c8s404jsyrifz80b22wvg-diff2html-cli-5.2.15"
         }
       }
     },

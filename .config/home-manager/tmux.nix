@@ -78,6 +78,9 @@
       set -g set-clipboard on
       set -as terminal-overrides ',*:Ms=\E]52;c;%p2%s\007'
 
+      # Pass OSC 8 hyperlinks through to the outer terminal (VS Code supports them)
+      set -as terminal-features ',xterm*:hyperlinks'
+
       # Auto-update SSH environment when reattaching
       set-hook -g client-attached 'run-shell "tmux set-environment SSH_TTY #{client_tty}; if [ -n \"$SSH_AUTH_SOCK\" ]; then tmux set-environment SSH_AUTH_SOCK $SSH_AUTH_SOCK; fi"'
 
@@ -94,6 +97,9 @@
       # Rename session and window
       bind r command-prompt -I "#{window_name}" "rename-window '%%'"
       bind R command-prompt -I "#{session_name}" "rename-session '%%'"
+      # prefix+, renames and pins the window so zsh precmd stops auto-naming it;
+      # submitting an empty name unpins it and returns to directory-based naming
+      bind , command-prompt -I "#{window_name}" { if-shell -F "#{==:%%,}" { set-option -wu @pinned } { rename-window -- "%%" ; set-option -w @pinned 1 } }
 
       # Split panes with | and _ (more intuitive than % and ")
       unbind %
