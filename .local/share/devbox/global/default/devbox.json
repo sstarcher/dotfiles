@@ -41,7 +41,8 @@
     "oras@latest",
     "uv@latest",
     "gh@latest",
-    "home-manager@latest"
+    "home-manager@latest",
+    "codex"
   ],
   "env": {
     "HELM_PLUGINS": "$PWD/.devbox/nix/profile/default"

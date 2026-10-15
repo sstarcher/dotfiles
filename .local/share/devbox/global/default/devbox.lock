@@ -231,6 +231,10 @@
         }
       }
     },
+    "codex": {
+      "resolved": "github:NixOS/nixpkgs/8c6b39505383e6d5dcb431f00cb3597b71f8045c?narHash=sha256-hUcT0jKmSHN5XgRW3sSEIIlqsVClkVfToluYtOd56ok%3D#codex",
+      "source": "nixpkg"
+    },
     "dive@latest": {
       "last_modified": "2024-10-13T23:44:06Z",
       "resolved": "github:NixOS/nixpkgs/d4f247e89f6e10120f911e2e2d2254a050d0f732#dive",
@@ -518,6 +522,10 @@
           "store_path": "/nix/store/vkpkkv3v16lx4bkz5cvph7zf1pbqwiyv-git-review-2.4.0"
         }
       }
+    },
+    "github:NixOS/nixpkgs/nixpkgs-unstable": {
+      "last_modified": "2026-10-05T00:52:30Z",
+      "resolved": "github:NixOS/nixpkgs/8c6b39505383e6d5dcb431f00cb3597b71f8045c?lastModified=1791161550&narHash=sha256-hUcT0jKmSHN5XgRW3sSEIIlqsVClkVfToluYtOd56ok%3D"
     },
     "glab@latest": {
       "last_modified": "2025-12-31T03:27:36Z",
