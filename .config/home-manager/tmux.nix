@@ -1,5 +1,15 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
+let
+  # Rewrites each Claude pane's saved command so restore reopens the same conversation.
+  claudeTmuxResume = pkgs.writeShellApplication {
+    name = "claude-tmux-resume";
+    runtimeInputs = [ config.programs.tmux.package pkgs.jq pkgs.gawk pkgs.coreutils ];
+    text = builtins.readFile ./tmux/claude-tmux-resume.sh;
+  };
+in
 {
+  home.packages = [ claudeTmuxResume ];
+
   programs.tmux = {
     enable = true;
     baseIndex = 1;
@@ -36,7 +46,9 @@
         extraConfig = ''
           set -g @resurrect-strategy-nvim 'session'
           set -g @resurrect-capture-pane-contents 'on'
-          set -g @resurrect-processes 'claude "~claude --*->claude" htop "~watch"'
+          set -g @resurrect-processes 'claude-tmux-resume claude "~claude --*->claude" htop "~watch"'
+          # Must be set here, before continuum loads: continuum's restore runs at plugin load.
+          set -g @resurrect-hook-post-save-layout '${lib.getExe claudeTmuxResume} save'
           set -g @resurrect-save 'F5'
           set -g @resurrect-restore 'F6'
         '';
