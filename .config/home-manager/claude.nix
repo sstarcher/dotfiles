@@ -93,12 +93,23 @@ let
           command = "~/.claude/hooks/tmux-color.sh PermissionRequest";
         }];
       }];
-      PreToolUse = [{
-        hooks = [{
-          type = "command";
-          command = "~/.claude/hooks/tmux-color.sh PreToolUse";
-        }];
-      }];
+      PreToolUse = [
+        {
+          hooks = [{
+            type = "command";
+            command = "~/.claude/hooks/tmux-color.sh PreToolUse";
+          }];
+        }
+        {
+          # Guards from the dotfiles (ai.nix deploys them): GitLab writes that decide or speak as me
+          # ask first; the repo-map clones never move.
+          matcher = "Bash";
+          hooks = [
+            { type = "command"; command = "~/.claude/hooks/gitlab-guard.py"; }
+            { type = "command"; command = "~/.claude/hooks/guard-main-checkout.py"; }
+          ];
+        }
+      ];
       PostToolUse = [{
         hooks = [{
           type = "command";
