@@ -9,6 +9,9 @@ let
       ANTHROPIC_DEFAULT_SONNET_MODEL = "claude-sonnet-5-5";
       ANTHROPIC_SMALL_FAST_MODEL = "claude-haiku-5-5";
       ANTHROPIC_DEFAULT_HAIKU_MODEL = "claude-haiku-5-5";
+      # Claude Code runs inside tmux, so TERM_PROGRAM=tmux and it would not emit OSC 8 links;
+      # tmux forwards them to VS Code (terminal-features xterm*:hyperlinks).
+      FORCE_HYPERLINK = "1";
     };
     permissions = {
       defaultMode = "bypassPermissions";
