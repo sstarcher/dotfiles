@@ -1,11 +1,10 @@
 # Claude Hooks for Tmux Integration
 
-This directory contains hooks that integrate Claude Code with tmux to provide visual feedback and automatic layout management.
+This directory contains hooks that integrate Claude Code with tmux to provide visual feedback.
 
 ## Files
 
 - **tmux-color.sh** - Manages tmux window colors based on Claude state (processing, blocked, finished)
-- **tmux-layout.sh** - Automatically reorganizes tmux panes for Claude Code teams
 - **tmux-status-config.example.sh** - Example configuration showing how to customize colors
 
 ## How It Works
@@ -42,14 +41,6 @@ The script uses a **counter-based blocking state** (`@claude_blocking_count` tmu
 5. Window stays red as long as counter > 0
 
 This counter-based design handles the multi-agent scenario where multiple agents request permissions simultaneously - one agent's resolution won't prematurely clear another agent's blocking state.
-
-### Team Layout Management (tmux-layout.sh)
-
-When using Claude Code teams (multiple agents), this script automatically manages pane layout:
-
-- **TeammateIdle** triggers automatic layout reorganization into a 3-column structure (via `~/.tmux/team-layout.sh`), but only once per team session
-- **SubagentStop** resets to a 2-pane layout (via `~/.tmux/reset-layout.sh`) when agent count drops to 2
-- **SessionEnd** clears the auto-applied flag for next session
 
 ### Known Limitation: Window-Level Tracking
 
@@ -88,10 +79,7 @@ See `tmux-status-config.example.sh` for more examples and available color option
 
 ## Logs
 
-Hook events are logged to separate files:
-
-- `~/.claude/color.log` - Color management events (tmux-color.sh)
-- `~/.claude/layout.log` - Layout management events (tmux-layout.sh)
+Hook events are logged to `~/.claude/color.log` (tmux-color.sh).
 
 Log format: `[timestamp] win:N EventType -> action`
 
@@ -104,12 +92,6 @@ Example (color.log):
 [2026-02-17 18:22:05] win:4 Stop -> (blocked x2, not clearing)
 [2026-02-17 18:22:07] win:4 IdlePrompt -> (permission granted, still blocked x1)
 [2026-02-17 18:22:10] win:4 UserPromptSubmit -> blue (processing)
-```
-
-Example (layout.log):
-```
-[2026-02-24 20:45:12] win:5 TeammateIdle -> (triggering team layout)
-[2026-02-24 20:50:33] win:5 SubagentStop -> (resetting to 2-pane layout)
 ```
 
 ## The /done Command
@@ -134,8 +116,3 @@ Use `/done` in Claude to signal task completion. This will reset the window colo
 - This can happen if the clearing event (`IdlePrompt` or `UserPromptSubmit`) fires for a different window
 - Check `~/.claude/color.log` to see which events fired and for which window
 - As a workaround, submitting any prompt in the affected window will clear the state
-
-**Team layout not triggering:**
-- Layout auto-applies once per team session (tracked by `@team_layout_auto_applied` window option)
-- Manual trigger: `tmux run-shell ~/.tmux/team-layout.sh`
-- Requires at least 3 panes (1 lead + 2+ agents)

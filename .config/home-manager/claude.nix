@@ -47,7 +47,7 @@ let
     };
     model = "claude-opus-5-5[1m]";
     effortLevel = "medium";
-    fastMode = true;
+    fastMode = false;
     tui = "default";
     enabledMcpjsonServers = [
       "awslabs-aws-documentation-mcp-server"
@@ -57,12 +57,22 @@ let
       "terraform"
     ];
     hooks = {
-      SessionStart = [{
-        hooks = [{
-          type = "command";
-          command = "~/.claude/hooks/tmux-color.sh SessionStart";
-        }];
-      }];
+      SessionStart = [
+        {
+          hooks = [{
+            type = "command";
+            command = "~/.claude/hooks/tmux-color.sh SessionStart";
+          }];
+        }
+        {
+          # Resumed shepherd session: restart the viewer, tell it to restart its daemon.
+          matcher = "resume";
+          hooks = [{
+            type = "command";
+            command = "~/.claude/hooks/shepherd-resume.py";
+          }];
+        }
+      ];
       Stop = [{
         hooks = [{
           type = "command";
@@ -76,16 +86,10 @@ let
         }];
       }];
       SessionEnd = [{
-        hooks = [
-          {
-            type = "command";
-            command = "~/.claude/hooks/tmux-color.sh SessionEnd";
-          }
-          {
-            type = "command";
-            command = "~/.claude/hooks/tmux-layout.sh SessionEnd";
-          }
-        ];
+        hooks = [{
+          type = "command";
+          command = "~/.claude/hooks/tmux-color.sh SessionEnd";
+        }];
       }];
       PermissionRequest = [{
         hooks = [{
@@ -135,21 +139,9 @@ let
         }];
       }];
       SubagentStop = [{
-        hooks = [
-          {
-            type = "command";
-            command = "~/.claude/hooks/tmux-color.sh SubagentStop";
-          }
-          {
-            type = "command";
-            command = "~/.claude/hooks/tmux-layout.sh SubagentStop";
-          }
-        ];
-      }];
-      TeammateIdle = [{
         hooks = [{
           type = "command";
-          command = "~/.claude/hooks/tmux-layout.sh TeammateIdle";
+          command = "~/.claude/hooks/tmux-color.sh SubagentStop";
         }];
       }];
       TaskCompleted = [{

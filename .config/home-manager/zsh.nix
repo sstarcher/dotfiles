@@ -15,6 +15,14 @@
     # Managed by home-manager
     # This file is sourced by the system .zshrc
 
+    # Interactive SSH logins drop straight into tmux (most recent session, else a new
+    # one); detaching ends the SSH session. IDE terminals and NO_TMUX=1 are left alone.
+    if [[ -o interactive && -n "$SSH_CONNECTION" && -z "$TMUX" && -z "$NO_TMUX" \
+          && -t 0 && -t 1 && "$TERM_PROGRAM" != vscode \
+          && "$TERMINAL_EMULATOR" != JetBrains-JediTerm ]] && command -v tmux &>/dev/null; then
+      { tmux attach 2>/dev/null || tmux new-session; } && exit
+    fi
+
     # Ensure yadm always uses personal email
     if command -v yadm &> /dev/null && [ "$(yadm gitconfig user.email)" != "shane.starcher@gmail.com" ]; then
       yadm gitconfig user.email "shane.starcher@gmail.com"
